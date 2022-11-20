@@ -1,0 +1,43 @@
+.loginpage {
+    position: relative;
+    margin: auto;
+    max-width: 400px;
+    width: 100%;
+    height: calc(100vh - 54px);
+}
+
+.loginpagecontainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+}
+
+.loginpagecontainer input {
+    height: 3em;
+    margin: .5em 0;
+}
+
+/* .loginpagecontainer p:nth-child(1) {
+    color: var(--fontColor);
+    font-weight: 600;
+    font-size: 1.2rem;
+} */
+
+.loginpagecontainer span {
+    color: var(--fontColor);
+    cursor: pointer;
+    margin-left: 0.5em;
+}
+
+.loginpagecontainer p:last-child {
+    color: var(--fontColorFaded);
+    text-align: center;
+}
+
+.error {
+    text-align: center;
+    color: red;
+}

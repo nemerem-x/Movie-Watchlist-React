@@ -1,0 +1,70 @@
+:root {
+    --primaryColor: #12130C;
+    --secondaryColor: #CCFF00;
+    --fontColor: #fff;
+    --grey: #1e1e1e;
+    --fontColorFaded: #42443C;
+}
+
+.yourwatchlist {
+    width: 100%;
+}
+
+.watchlistcontainer {
+    width: 80%;
+    margin: auto;
+}
+
+.watchlistcontainer h1 {
+    color: var(--fontColorFaded);
+}
+
+.watchlistcontainer p, h2 {
+    color: var(--fontColor);
+    margin: 0;
+}
+
+.watchlistcontainer p {
+    font-size: 0.7rem;
+    color: var(--secondaryColor);
+}
+
+.watchlistcontainer h2 {
+    font-size: 1rem;
+    padding: .3em 0;
+    height: 3em;
+}
+
+.watchlistcontainer h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.watchlistsection {
+    display: flex;
+    gap: 20px;
+    overflow-x: scroll;
+}
+
+.accesswatchlist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.accesswatchlist p {
+    font-size: 1rem;
+    text-align: center;
+    color: var(--fontColor);
+    margin: 2.5em 0;
+}
+
+.accesswatchlist a {
+    background-color: var(--secondaryColor);
+    color: var(--primaryColor);
+    padding: .7em 2em;
+    border-radius: 10px;
+    font-weight: 600;
+}

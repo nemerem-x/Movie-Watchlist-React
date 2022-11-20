@@ -1,0 +1,336 @@
+:root {
+  --primaryColor: #12130C;
+  --secondaryColor: #CCFF00;
+  --fontColor: #fff;
+  --grey: #1e1e1e;
+  --fontColorFaded: #42443C;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 0.9rem;
+  margin: 0;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--primaryColor);
+}
+
+input {
+  border: none;
+  border-radius: 10px;
+  padding-left: 0.8em;
+  outline: none;
+  background-color: var(--grey);
+  color: var(--fontColor);
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+/* Nav ---------------------------------------------------- */
+nav {
+  padding-left: 1em;
+}
+nav a {
+  font-size: 0.9rem;
+  color: var(--fontColor);
+  text-decoration: none;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  padding-left: 1.5em;
+  white-space: nowrap;
+}
+
+.navbox {
+  position: relative;
+  width: 100%;
+  padding: 0.5em;
+  background-color: var(--primaryColor);
+}
+
+.navcontainer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  gap: 3em;
+  margin: auto;
+}
+
+.navbox p {
+  margin: 0;
+  color: var(--fontColor);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+}
+
+.left input {
+  width: 50%;
+  height: 3em;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+.right img {
+  max-width: 18%;
+  height: auto;
+  cursor: pointer;
+}
+
+.avatar {
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar p {
+  background-color: var(--fontColorFaded);
+  border-radius: 50%;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  padding-top: .5em;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.avatar img {
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.watchlistCount{
+  position: absolute;
+  right: 0;
+  top: 5px;
+  background-color: red;
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+}
+
+.right .watchlist {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  align-items: center;
+  height: 2.5em;
+  width: 7em;
+}
+
+.right .watchlist:hover {
+  background-color: var(--grey);
+  border-radius: 10px;
+}
+
+.loginBox {
+  position: absolute;
+  background-color: var(--primaryColor);
+  width: 300px;
+  padding: 2em;
+  height: auto;
+  top: 60px;
+  right: 150px;
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.x {
+  top: 15px;
+  right: 15px;
+  position: absolute;
+  height: 1em;
+  width: 1em;
+  cursor: pointer;
+}
+
+.loginBox input {
+  height: 2.5em;
+  margin: .5em 0;
+}
+
+label {
+  color: var(--fontColor);
+  margin-top: 1em;
+}
+
+.loginBox p {
+  text-align: center;
+}
+
+.loginBox p:last-child {
+  color: var(--fontColorFaded);
+  text-align: center;
+}
+
+.login .error {
+  text-align: center;
+  color: red;
+}
+
+.loginBox span {
+  color: var(--fontColor);
+  cursor: pointer;
+  margin-left: 0.5em;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+}
+
+.login button {
+  margin: 1em 0;
+  font-weight: 600;
+  background-color: var(--secondaryColor);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: var(--grey);
+}
+
+.login button:hover {
+  background-color: var(--grey);
+  color: var(--fontColor);
+}
+
+.login p {
+  cursor: pointer;
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--fontColorFaded);
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+#spinner {
+  width: 30px;
+  margin: 1em auto;
+}
+
+.logout {
+  color: var(--fontColorFaded);
+}
+
+.logout p {
+  margin: 1em 0;
+  text-align: left;
+  font-size: 0.8rem;
+  color: var(--fontColorFaded);
+}
+
+.logout button {
+  width: 100%;
+  background-color: var(--secondaryColor);
+  margin-top: 2em;
+  font-weight: 600;
+}
+
+.logout a {
+  color: var(--fontColor);
+  text-decoration: none;
+}
+
+/* Hero ----------------------------------------------------- */
+.heroInfo {
+  width: 50%;
+}
+
+.heroInfo span {
+  color: #1e1e1e;
+  margin: 0 1em;
+  font-size: .6rem;
+  background-color: var(--secondaryColor);
+  padding: .5em;
+  border-radius: 50%;
+}
+
+.heroInfo p {
+  display: flex;
+  align-items:center;
+  color: var(--fontColor);
+}
+
+.heroInfo h1 {
+  margin: 0;
+  font-size: 3rem;
+  color: var(--fontColor);
+}
+
+button {
+  padding: .7em 2em;
+  margin-top: 1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#btnDetails {
+  font-weight: 600;
+  margin-right: 1.5em;
+  background-color: #fff;
+}
+
+#btnAddToWatchlist {
+  font-weight: 600;
+  margin-right: 1.5em;
+  background: none;
+  border: 2px solid #fff;
+  color: var(--fontColor);
+}
+
+
+/* form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  gap: 6px;
+} */
+
+/* input {
+  height: 2.5em;
+  width: 20em;
+} */
+
+/* .login p {
+  color: red;
+}
+
+.login {
+  width: 100%;
+} */

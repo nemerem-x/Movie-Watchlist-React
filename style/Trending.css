@@ -1,0 +1,49 @@
+:root {
+    --primaryColor: #12130C;
+    --secondaryColor: #CCFF00;
+    --fontColor: #fff;
+    --grey: #1e1e1e;
+    --fontColorFaded: #42443C;
+  }
+
+.trending {
+    width: 100%;
+    margin-top: 12em;
+}
+
+.trendingcontainer {
+    width: 80%;
+    margin: auto;
+}
+
+.trendingcontainer h1 {
+    color: var(--fontColorFaded);
+}
+
+.trendingcontainer p, h2 {
+    color: var(--fontColor);
+    margin: 0;
+}
+
+.trendingcontainer p {
+    font-size: 0.7rem;
+    color: var(--secondaryColor);
+}
+
+.trendingcontainer h2 {
+    font-size: 1rem;
+    padding: .3em 0;
+    height: 3em;
+}
+
+.trendingcontainer h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.trendingsection {
+    display: flex;
+    gap: 20px;
+    overflow-x: scroll;
+    /* padding: 0 1em; */
+}
