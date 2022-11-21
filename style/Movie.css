@@ -1,6 +1,7 @@
 .movie {
     width: 185px;
     position: relative;
+    cursor: pointer;
 }
 .movie img {
     /* width: 150px;

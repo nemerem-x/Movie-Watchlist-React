@@ -56,6 +56,9 @@ nav li {
 
 .navbox {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   padding: 0.5em;
   background-color: var(--primaryColor);
@@ -77,13 +80,18 @@ nav li {
 
 .left {
   display: flex;
-  align-items: center;
   gap: 1em;
+  align-items: center;
   width: 100%;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
+
 .left input {
-  width: 50%;
+  width: 100%;
   height: 3em;
 }
 
@@ -164,7 +172,7 @@ nav li {
   height: auto;
   top: 60px;
   right: 150px;
-  z-index: 1;
+  z-index: 2;
   border-radius: 10px;
 }
 
@@ -272,23 +280,37 @@ button:disabled {
 
 .heroInfo span {
   color: #1e1e1e;
-  margin: 0 1em;
+  margin-right: 1em;
   font-size: .6rem;
   background-color: var(--secondaryColor);
-  padding: .5em;
   border-radius: 50%;
+  height: 32px;
+  max-width: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .heroInfo p {
   display: flex;
   align-items:center;
   color: var(--fontColor);
+  font-size: 1rem;
 }
 
 .heroInfo h1 {
   margin: 0;
-  font-size: 3rem;
+  font-size: 4rem;
   color: var(--fontColor);
+}
+
+.heroDetails {
+  position: absolute;
+  z-index: 1;
+  left: 225px;
+  width: 40%;
+  bottom: 15%;
 }
 
 button {
@@ -313,24 +335,157 @@ button {
   color: var(--fontColor);
 }
 
-
-/* form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
-  gap: 6px;
-} */
-
-/* input {
-  height: 2.5em;
-  width: 20em;
-} */
-
-/* .login p {
-  color: red;
+.hamburger {
+  display: none;
+  cursor: pointer;
 }
 
-.login {
-  width: 100%;
-} */
+.mobilecontainer {
+  display: none;
+}
+
+.logoSection {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .logoSection {
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .x {
+    position: relative;
+  }
+
+  .x {
+    top: 0;
+    right: 0;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .loginBox {
+    display: none;
+  }
+
+  .navcontainer {
+    width: 80%;
+    align-items: center;
+  }
+
+  .right {
+    display: none;
+  }
+
+  .left nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .mobilecontainer {
+    display: flex;
+    padding: 2em;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    position: fixed;
+    overflow: hidden;
+    background-color: var(--primaryColor);
+    z-index: 2;
+    top: 0;
+    right: 0;
+    width: 50%;
+    text-align: center;
+  }
+
+  .mobilecontainer ul li a {
+    width: 100%;
+    display: block;
+    padding: 1em 0;
+    font-size: 1.2rem;
+  }
+
+  .mobilecontainer nav {
+    padding: 0;
+    margin-top: 2em;
+    text-align: left;
+    width: 85%;
+  }
+
+  .mobilecontainer ul li {
+    padding: 0 ;
+  }
+
+  .mobilecontainer nav ul {
+    margin: auto;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 2px solid var(--grey);
+  }
+
+  .loginButton {
+    display: block;
+    font-weight: 600;
+    height: auto;
+    color: var(--primaryColor);
+    padding: 1em 2em;
+    margin: 1em 2em;
+    border-radius: 10px;
+    background-color: var(--secondaryColor);
+  }
+
+  .mobileMenuLogin {
+    height: auto;
+    margin: 1em 0;
+    width: 72%;
+  }
+
+  /* Hero */
+  .heroInfo {
+    width: 100%;
+  }
+
+  .heroInfo p, h1 {
+    text-align: left;
+  }
+
+  .heroDetails {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    padding-left: 4em;
+    width: 90%;
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navcontainer {
+    width: 100%;
+    align-items: center;
+  }
+
+  .mobilecontainer {
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    touch-action: none;
+    /* padding: 1.2em .5em; */
+  }
+
+  .heroInfo {
+    text-align: center;
+  }
+
+  /* body {
+    overflow: auto;
+  } */
+}

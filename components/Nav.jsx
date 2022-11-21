@@ -12,6 +12,7 @@ import X from "/x.svg"
 export default function Nav() {
 
     const [loginModal, setLoginModal] = useState(false)
+    const [mobileNavModal, setMobileNavModal] = useState(false)
     const [signInOut, setSignInOut] = useState(false)
     const [user, loading] = useAuthState(auth)
 
@@ -53,8 +54,48 @@ export default function Nav() {
                 </div>
                 
             </div>
+
+            <div className="hamburger">
+                <svg onClick={()=>setMobileNavModal(true)} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.15625 22.9688H24.8438M5.15625 15.4688H24.8438M5.15625 7.96875H24.8438" stroke="white" strokeWidth="2.8125" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            </div>
+
         </div>
 
+        {/* Mobile Menu */}
+        
+        {
+        mobileNavModal &&
+        <div className="mobilecontainer">
+
+            <div className="logoSection">
+                <p className="logo">NMDb</p>
+                <svg onClick={()=>setMobileNavModal(false)} className="x" width="54" height="54" viewBox="0 0 54 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 50.3132L27.1566 27.1566M50.3132 4L27.1522 27.1566M27.1522 27.1566L4 4M27.1566 27.1566L50.3132 50.3132" stroke="white" strokeWidth="6.625" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><Link onClick={()=>setMobileNavModal(false)} to="/">Home</Link></li>
+                    <li><Link onClick={()=>setMobileNavModal(false)} to="/trending">Trending</Link></li>
+                    <li><Link onClick={()=>setMobileNavModal(false)} to="/tvshows">TV Shows</Link></li>
+                </ul> 
+            </nav>
+
+            { user ? <User/>
+                :
+                <div className="mobileMenuLogin">
+                    <Link onClick={()=>setMobileNavModal(false)} className="loginButton" to="/login">Sign in</Link>
+                    <p>Don't have an account? 
+                    <Link onClick={()=>setMobileNavModal(false)} to="/login">Sign up</Link>
+                    </p>
+                </div>
+            }
+
+        </div>
+        }
 
         {
         loginModal &&

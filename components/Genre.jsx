@@ -47,12 +47,6 @@ export default function Genre() {
         </svg>
 
       <div className="genrecontainer">
-        
-        {/* <select>
-            <option value="Action">Action</option>
-            <option value="Drama">Drama</option>
-            <option value="Drama">Drama</option>
-        </select> */}
 
         <div onClick={open} className="select">{selected}
           <svg width="12" transform={expand ? "rotate(180)" : "rotate(0)"} height="8" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">

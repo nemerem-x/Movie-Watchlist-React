@@ -8,7 +8,7 @@
 
 .trending {
     width: 100%;
-    margin-top: 12em;
+    position: relative;
 }
 
 .trendingcontainer {
@@ -45,5 +45,28 @@
     display: flex;
     gap: 20px;
     overflow-x: scroll;
-    /* padding: 0 1em; */
 }
+
+#toRight, #toLeft {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: 48%;
+}
+
+#toRight {
+    right: 7%;
+}
+
+#toLeft {
+    left: 7%;
+}
+
+.trendingsection::-webkit-scrollbar {
+    display: none; /*Chrome*/
+  }
+  
+  .trendingsection {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

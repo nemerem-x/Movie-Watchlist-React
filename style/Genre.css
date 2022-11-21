@@ -116,3 +116,11 @@
     border-bottom: none;
 }
 
+.genresection::-webkit-scrollbar {
+    display: none; /*Chrome*/
+  }
+  
+  .genresection {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
