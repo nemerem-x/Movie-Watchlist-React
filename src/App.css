@@ -386,7 +386,9 @@ button {
   }
 
   .hamburger {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 1em;
   }
 
   .mobilecontainer {
