@@ -7,6 +7,7 @@ import addToWatchlist from "/add_to_watchlist.png"
 import Login from "./Login"
 import Signup from "./Signup"
 import User from "./User"
+import SearchResult from "./SearchResult"
 import { useMediaQuery } from 'react-responsive'
 
 
@@ -45,6 +46,9 @@ export default function Nav() {
                         <li><Link to="/tvshows">TV Shows</Link></li>
                     </ul> 
                 </nav>
+
+                <SearchResult/>
+
             </div>
 
             {/* Disappears on mobile - css */}

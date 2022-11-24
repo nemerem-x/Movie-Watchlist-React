@@ -1,7 +1,5 @@
 import '../style/NowPlaying.css'
-import { Link } from 'react-router-dom'
 import { useRef } from 'react'
-import Movie from './Movie'
 import NowplayingMovie from './NowplayingMovie'
 
 export default function NowPlaying() {
