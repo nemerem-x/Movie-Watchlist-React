@@ -2,7 +2,7 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import {auth, db, signOut} from "../src/firebase"
 import { Link } from "react-router-dom"
 
-export default function User() {
+export default function User({navModal}) {
 
     const [user, loading] = useAuthState(auth)
 
@@ -21,7 +21,7 @@ export default function User() {
             <>
                 <p>User ID: <br /> {user.uid}</p>
                 <p>User Email: {user.email}</p>
-                <Link to={"/watchlist"}>Go to my watchlist</Link>
+                <Link onClick={navModal} to={"/watchlist"}>Go to my watchlist</Link>
             </>
         }
         <button onClick={logOut}>Logout</button>

@@ -47,26 +47,41 @@
     overflow-x: scroll;
 }
 
-#toRight, #toLeft {
+.trending #toRight {
     cursor: pointer;
     position: absolute;
     z-index: 1;
-    top: 48%;
+    top: 43%;
 }
 
-#toRight {
-    right: 7%;
-}
-
-#toLeft {
-    left: 7%;
+.trending #toLeft {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: 43%;
 }
 
 .trendingsection::-webkit-scrollbar {
     display: none; /*Chrome*/
-  }
+}
   
-  .trendingsection {
+.trendingsection {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-  }
+}
+
+@media screen and (max-width: 1000px) {
+    .trendingsection {
+        padding: 0 2em;
+    }
+
+    .trendingcontainer {
+        width: 100%;
+        margin: auto;
+    }
+    
+    .trendingcontainer h1 {
+        color: var(--fontColorFaded);
+        padding: 0 1em;
+    }
+}

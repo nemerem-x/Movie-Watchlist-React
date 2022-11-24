@@ -19,12 +19,26 @@ body {
 }
 
 input {
+  padding: 1em;
+  margin: .5em 0;
+  font-size: 0.9rem;
   border: none;
   border-radius: 10px;
-  padding-left: 0.8em;
   outline: none;
   background-color: var(--grey);
   color: var(--fontColor);
+}
+
+button {
+  padding: .7em 2em;
+  margin: 1em 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--primaryColor);
+  background-color: var(--secondaryColor);
 }
 
 a {
@@ -55,10 +69,12 @@ nav li {
 }
 
 .navbox {
+  height: 4.5em;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 0.5em;
   background-color: var(--primaryColor);
@@ -70,7 +86,7 @@ nav li {
   justify-content: space-between;
   width: 80%;
   gap: 3em;
-  margin: auto;
+  padding: 0 .5em;
 }
 
 .navbox p {
@@ -92,12 +108,16 @@ nav {
 
 .left input {
   width: 100%;
-  height: 3em;
+  /* height: 3em; */
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+.logo a {
+  color: var(--fontColor);
 }
 
 .right {
@@ -186,7 +206,7 @@ nav {
 }
 
 .loginBox input {
-  height: 2.5em;
+  /* height: 45px; */
   margin: .5em 0;
 }
 
@@ -218,12 +238,6 @@ label {
 .login {
   display: flex;
   flex-direction: column;
-}
-
-.login button {
-  margin: 1em 0;
-  font-weight: 600;
-  background-color: var(--secondaryColor);
 }
 
 button:disabled {
@@ -308,17 +322,9 @@ button:disabled {
 .heroDetails {
   position: absolute;
   z-index: 1;
-  left: 225px;
+  left: 11em;
   width: 40%;
   bottom: 15%;
-}
-
-button {
-  padding: .7em 2em;
-  margin-top: 1em;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
 }
 
 #btnDetails {
@@ -375,6 +381,7 @@ button {
   .navcontainer {
     width: 80%;
     align-items: center;
+    height: inherit;
   }
 
   .right {
@@ -416,7 +423,7 @@ button {
 
   .mobilecontainer nav {
     padding: 0;
-    margin-top: 2em;
+    margin: 4em 0;
     text-align: left;
     width: 85%;
   }
@@ -430,22 +437,11 @@ button {
     flex-direction: column;
     width: 100%;
     border-bottom: 2px solid var(--grey);
-  }
-
-  .loginButton {
-    display: block;
-    font-weight: 600;
-    height: auto;
-    color: var(--primaryColor);
-    padding: 1em 2em;
-    margin: 1em 2em;
-    border-radius: 10px;
-    background-color: var(--secondaryColor);
+    padding-bottom: 3em;
   }
 
   .mobileMenuLogin {
     height: auto;
-    margin: 1em 0;
     width: 72%;
   }
 
@@ -461,10 +457,15 @@ button {
   .heroDetails {
     position: absolute;
     z-index: 1;
-    left: 0;
-    padding-left: 4em;
-    width: 90%;
+    left: 7em;
+    width: 77%;
     bottom: 0;
+  }
+
+  #mobileInput {
+    height: 100%;
+    width: 80%;
+    position: absolute;
   }
 }
 
@@ -483,8 +484,13 @@ button {
     /* padding: 1.2em .5em; */
   }
 
-  .heroInfo {
-    text-align: center;
+  .heroInfo h1 {
+    font-size: 3rem;
+  }
+
+  .heroDetails {
+    left: 2em;
+    width: 90%;
   }
 
   /* body {

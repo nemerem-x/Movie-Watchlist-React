@@ -11,19 +11,12 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
+    width: 80%;
     height: auto;
 }
 
-.loginpagecontainer input {
-    height: 3em;
+/* .loginpagecontainer input {
     margin: .5em 0;
-}
-
-/* .loginpagecontainer p:nth-child(1) {
-    color: var(--fontColor);
-    font-weight: 600;
-    font-size: 1.2rem;
 } */
 
 .loginpagecontainer span {
