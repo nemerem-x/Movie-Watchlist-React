@@ -1,13 +1,12 @@
-import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 import {auth, db, signOut} from "../src/firebase"
 import { doc, setDoc, onSnapshot  } from "firebase/firestore"
-import Nav from "../components/Nav"
 import Hero from "../components/Hero"
 import Trending from "../components/Trending"
 import Watchlist from "../components/Watchlist"
 import Genre from "../components/Genre"
+import NowPlaying from "../components/NowPlaying"
 
 export default function Home() {
 
@@ -87,6 +86,7 @@ export default function Home() {
             <Trending/>
             <Watchlist/>
             <Genre/>
+            <NowPlaying/>
         </>
     )
 }

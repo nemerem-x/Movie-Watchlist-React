@@ -1,0 +1,10 @@
+.nowplaying {
+    width: 100%;
+    height: 22em;
+}
+
+.nowplayingcontainer {
+    height: 100%;
+    width: 80%;
+    margin: auto;
+}
