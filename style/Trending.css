@@ -9,11 +9,14 @@
 .trending {
     width: 100%;
     position: relative;
+    height: 30em;
 }
 
 .trendingcontainer {
     width: 80%;
+    height: 100%;
     margin: auto;
+    position: relative;
 }
 
 .trendingcontainer h1 {
@@ -45,9 +48,10 @@
     display: flex;
     gap: 20px;
     overflow-x: scroll;
+    padding-left: .5em;
 }
 
-.trending #toRight {
+/* .trending #toRight {
     cursor: pointer;
     position: absolute;
     z-index: 1;
@@ -59,7 +63,7 @@
     position: absolute;
     z-index: 1;
     top: 43%;
-}
+} */
 
 .trendingsection::-webkit-scrollbar {
     display: none; /*Chrome*/

@@ -1,0 +1,42 @@
+.movie {
+    width: 185px;
+    position: relative;
+    cursor: pointer;
+}
+.movie img {
+    /* width: 150px;
+    height: 224px; */
+    width: 185px;
+    height: 276px;
+    border-radius: 10px;
+    background-color: red;
+}
+
+.overlay {
+    position: absolute;
+    width: 185px;
+    height: 276px;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.overlay svg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--secondaryColor);
+    padding: .5em;
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

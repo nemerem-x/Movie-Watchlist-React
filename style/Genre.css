@@ -9,12 +9,13 @@
 .genre {
     width: 100%;
     position: relative;
+    height: 30em;
 }
 
 .genrecontainer {
     position: relative;
     width: 80%;
-    height: 380px;
+    height: 100%;
     margin: auto;
 }
 
@@ -55,7 +56,7 @@
     cursor: pointer;
     position: absolute;
     z-index: 1;
-    top: 48%;
+    top: 40%;
 }
 
 #toRight {
