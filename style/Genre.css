@@ -55,7 +55,7 @@
 #toRight, #toLeft {
     cursor: pointer;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     top: 40%;
 }
 

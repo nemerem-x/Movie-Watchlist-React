@@ -1,42 +1,39 @@
-.movie {
-    width: 185px;
+.nowplayingmovie {
+    width: 390px;
     position: relative;
     cursor: pointer;
 }
-.movie img {
-    /* width: 150px;
-    height: 224px; */
-    width: 185px;
+.nowplayingmovie img {
+    width: 390px;
     height: 276px;
     border-radius: 10px;
     background-color: red;
 }
 
-.overlay {
+.nowplayingmovie .overlay {
     position: absolute;
-    width: 185px;
+    width: 390px;
     height: 276px;
+    z-index: 1;
     background-color: rgba(0,0,0, 0.5);
 }
 
-.overlay svg {
+.nowplayingmovie .overlay #add {
     position: absolute;
     right: 10px;
     top: 10px;
     cursor: pointer;
 }
 
-.rating {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background-color: var(--secondaryColor);
-    padding: .5em;
-    height: 3em;
-    width: 3em;
-    border-radius: 50%;
-    top: 50%;
+.nowplayingmovie #play {
+    position: absolute;
     left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
 }
+
+.playing {
+    position: relative;
+}
+
