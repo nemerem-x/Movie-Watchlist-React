@@ -407,7 +407,7 @@ button:disabled {
     position: fixed;
     overflow: hidden;
     background-color: var(--primaryColor);
-    z-index: 2;
+    z-index: 10;
     top: 0;
     right: 0;
     width: 50%;
