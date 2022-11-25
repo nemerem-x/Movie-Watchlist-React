@@ -140,6 +140,10 @@ scrollbar-width: none;  /* Firefox */
         color: var(--fontColorFaded);
         padding: 0 1em;
     }
+
+    .select {
+        margin-left: 1em;
+    }
 }
 
 @media screen and (max-width: 768px) {

@@ -1,12 +1,9 @@
 import './App.css'
 import Home from '../pages/Home'
 import Watchlist from '../pages/Watchlist'
-import Login from "../components/Login"
 import LoginPage from '../pages/LoginPage'
-import Trending from '../components/Trending'
 import TvShows from '../components/TvShows'
 import TrendingPage from '../pages/TrendingPage'
-import Signup from '../components/Signup'
 import { Routes, Route } from "react-router-dom"
 import { useAuthState } from "react-firebase-hooks/auth"
 import {auth} from "../src/firebase"

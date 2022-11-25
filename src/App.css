@@ -33,12 +33,15 @@ button {
   padding: .7em 2em;
   margin: 1em 0;
   font-size: 1rem;
-  font-weight: 600;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   color: var(--primaryColor);
   background-color: var(--secondaryColor);
+}
+
+h2 {
+  font-weight: 400;
 }
 
 a {
@@ -279,7 +282,7 @@ button:disabled {
   width: 100%;
   background-color: var(--secondaryColor);
   margin-top: 2em;
-  font-weight: 600;
+  /* font-weight: 600; */
 }
 
 .logout a {
@@ -328,13 +331,13 @@ button:disabled {
 }
 
 #btnDetails {
-  font-weight: 600;
+  /* font-weight: 600; */
   margin-right: 1.5em;
   background-color: #fff;
 }
 
 #btnAddToWatchlist {
-  font-weight: 600;
+  /* font-weight: 600; */
   margin-right: 1.5em;
   background: none;
   border: 2px solid #fff;
