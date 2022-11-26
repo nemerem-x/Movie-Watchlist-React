@@ -2,8 +2,8 @@ import './App.css'
 import Home from '../pages/Home'
 import Watchlist from '../pages/Watchlist'
 import LoginPage from '../pages/LoginPage'
-import TvShows from '../components/TvShows'
-import TrendingPage from '../pages/TrendingPage'
+import Discover from '../pages/Discover'
+import Footer from '../components/Footer'
 import { Routes, Route } from "react-router-dom"
 import { useAuthState } from "react-firebase-hooks/auth"
 import {auth} from "../src/firebase"
@@ -22,12 +22,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
 
-          <Route exact path='/trending' 
-            element={<TrendingPage/> } 
-          />
-
-          <Route exact path='/tvshows' 
-            element={<TvShows/> } 
+          <Route exact path='/discover' 
+            element={<Discover/> } 
           />
 
           <Route exact path='/watchlist' 
@@ -43,6 +39,9 @@ function App() {
           />
 
         </Routes>
+
+        <Footer/>
+
     </>
   )
 }

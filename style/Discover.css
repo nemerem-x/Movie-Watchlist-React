@@ -1,0 +1,66 @@
+.discover {
+    width: 80%;
+    margin: auto;
+}
+
+.discover h1 {
+    color: var(--fontColor);
+    margin: 3em 0;
+    text-align: center;
+}
+
+.discovermovies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1em;
+    justify-items: center;
+    margin-top: 3em;
+}
+
+.paginationbox {
+    width: 100%;
+    margin: 3em 0;
+}
+
+.pagination {
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    justify-content: center;
+}
+
+.pagination p {
+    margin: 0;
+    color: var(--fontColor);
+}
+
+.pagination .prev, .next {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    cursor: pointer;
+}
+
+.pagination .numbers {
+    display: flex;
+    gap: .5em;
+}
+
+.pagination .numbers p {
+    display: flex;
+    padding: .3em .7em;
+    border-radius: 5px;
+    background-color: var(--grey);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .discover {
+        width: 95%;
+    }
+
+    .discovermovies {
+        gap: 0em;
+    }
+}

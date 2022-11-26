@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { auth } from "../src/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
-import { Link } from "react-router-dom"
+import { Link , NavLink } from "react-router-dom"
 import userAvatar from "/login.png"
 import addToWatchlist from "/add_to_watchlist.png"
 import Login from "./Login"
@@ -41,17 +41,16 @@ export default function Nav() {
                 }
                 <nav>
                     <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/trending">Trending</Link></li>
-                        <li><Link to="/tvshows">TV Shows</Link></li>
+                        <li><NavLink activeClassName="active" to="/">Home</NavLink></li>
+                        <li><NavLink activeClassName="active" to="/discover">Discover</NavLink></li>
                     </ul> 
                 </nav>
 
-                <SearchResult/>
+                {/* <SearchResult/> */}
 
             </div>
 
-            {/* Disappears on mobile - css */}
+            {/* Disappears on mobile - css display none */}
             <div className="right">
                 <Link to="/watchlist">
                     <div className="watchlist">
@@ -106,9 +105,8 @@ export default function Nav() {
 
                 <nav>
                     <ul>
-                        <li><Link onClick={()=>setMobileNavModal(false)} to="/">Home</Link></li>
-                        <li><Link onClick={()=>setMobileNavModal(false)} to="/trending">Trending</Link></li>
-                        <li><Link onClick={()=>setMobileNavModal(false)} to="/tvshows">TV Shows</Link></li>
+                        <li><NavLink activeClassName="active" onClick={()=>setMobileNavModal(false)} to="/">Home</NavLink></li>
+                        <li><NavLink activeClassName="active" onClick={()=>setMobileNavModal(false)} to="/discover">Discover</NavLink></li>
                     </ul> 
                 </nav>
 

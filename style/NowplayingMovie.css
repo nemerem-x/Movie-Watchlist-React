@@ -10,6 +10,27 @@
     background-color: red;
 }
 
+.nowplayingmovie p, h2 {
+    color: var(--fontColor);
+    margin: 0;
+}
+
+.nowplayingmovie p {
+    font-size: 0.7rem;
+    color: var(--secondaryColor);
+}
+
+.nowplayingmovie h2 {
+    font-size: 1rem;
+    padding: .3em 0;
+    height: 3em;
+}
+
+.nowplayingmovie h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
 .nowplayingmovie .overlay {
     position: absolute;
     width: 390px;

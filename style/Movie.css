@@ -12,9 +12,31 @@
     background-color: red;
 }
 
+.movie p, h2 {
+    color: var(--fontColor);
+    margin: 0;
+}
+
+.movie p {
+    font-size: 0.7rem;
+    color: var(--secondaryColor);
+}
+
+.movie h2 {
+    font-size: 1rem;
+    padding: .3em 0;
+    height: 3em;
+}
+
+.movie h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
 .overlay {
     position: absolute;
     width: 185px;
+    border-radius: 10px;
     height: 276px;
     background-color: rgba(0,0,0, 0.5);
 }

@@ -16,47 +16,12 @@
     padding: 0 1em;
 }
 
-.nowplayingcontainer p, h2 {
-    color: var(--fontColor);
-    margin: 0;
-}
-
-.nowplayingcontainer p {
-    font-size: 0.7rem;
-    color: var(--secondaryColor);
-}
-
-.nowplayingcontainer h2 {
-    font-size: 1rem;
-    padding: .3em 0;
-    height: 3em;
-}
-
-.nowplayingcontainer h3 {
-    font-size: 1rem;
-    margin: 0;
-}
-
 .nowplayingsection {
     display: flex;
     gap: 20px;
     overflow-x: scroll;
     padding-left: .5em;
 }
-
-/* .nowplaying #toRight {
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
-    top: 43%;
-}
-
-.nowplaying #toLeft {
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
-    top: 43%;
-} */
 
 .nowplayingsection::-webkit-scrollbar {
     display: none; /*Chrome*/
@@ -76,10 +41,5 @@
         width: 100%;
         margin: auto;
     }
-
-    /* .nowplayingcontainer h1 {
-        color: var(--fontColorFaded);
-        padding: 0 1em;
-    } */
 
 }
