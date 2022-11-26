@@ -26,6 +26,13 @@ export default function Nav() {
         }
     },[user])
 
+    const closeModal = (e) => {
+        if(e.target.id === "signModalBg"){
+            setLoginModal(false)
+        }
+        // console.log(e.target.id)
+    }
+
   return (
     <div className='navbox'>
         <div className="navcontainer">
@@ -41,8 +48,8 @@ export default function Nav() {
                 }
                 <nav>
                     <ul>
-                        <li><NavLink activeClassName="active" to="/">Home</NavLink></li>
-                        <li><NavLink activeClassName="active" to="/discover">Discover</NavLink></li>
+                        <li><NavLink className={({isActive})=>(isActive ? "active" : '')} to="/">Home</NavLink></li>
+                        <li><NavLink className={({isActive})=>(isActive ? "active" : '')} to="/discover">Discover</NavLink></li>
                     </ul> 
                 </nav>
 
@@ -105,8 +112,8 @@ export default function Nav() {
 
                 <nav>
                     <ul>
-                        <li><NavLink activeClassName="active" onClick={()=>setMobileNavModal(false)} to="/">Home</NavLink></li>
-                        <li><NavLink activeClassName="active" onClick={()=>setMobileNavModal(false)} to="/discover">Discover</NavLink></li>
+                        <li><NavLink className={({isActive})=>(isActive ? "active" : '')} onClick={()=>setMobileNavModal(false)} to="/">Home</NavLink></li>
+                        <li><NavLink className={({isActive})=>(isActive ? "active" : '')} onClick={()=>setMobileNavModal(false)} to="/discover">Discover</NavLink></li>
                     </ul> 
                 </nav>
 
@@ -125,36 +132,39 @@ export default function Nav() {
 
         {
             loginModal &&
-            <div className="loginBox">
+            <div id="signModalBg" onClick={(e)=>closeModal(e)}>
 
-                <svg onClick={()=>setLoginModal(false)} className="x" width="54" height="54" viewBox="0 0 54 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 50.3132L27.1566 27.1566M50.3132 4L27.1522 27.1566M27.1522 27.1566L4 4M27.1566 27.1566L50.3132 50.3132" stroke="white" strokeWidth="6.625" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <div className="loginBox">
 
-                {
-                    user ?
-                    <User/>
-                    :
-                    <>
-                        {
-                            !signInOut ?
-                            <>
-                                <Login/>
-                                <p>Don't have an account? 
-                                    <span onClick={()=>setSignInOut(true)}>Sign up</span>
-                                </p>
-                            </>
-                            :
-                            <>
-                                <Signup/>
-                                <p>Already have an account?
-                                    <span onClick={()=>setSignInOut(false)}>Sign in</span>
-                                </p>
-                            </>
-                        }
-                    </>
-                } 
+                    <svg onClick={()=>setLoginModal(false)} className="x" width="54" height="54" viewBox="0 0 54 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 50.3132L27.1566 27.1566M50.3132 4L27.1522 27.1566M27.1522 27.1566L4 4M27.1566 27.1566L50.3132 50.3132" stroke="white" strokeWidth="6.625" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
 
+                    {
+                        user ?
+                        <User/>
+                        :
+                        <>
+                            {
+                                !signInOut ?
+                                <>
+                                    <Login/>
+                                    <p>Don't have an account? 
+                                        <span onClick={()=>setSignInOut(true)}>Sign up</span>
+                                    </p>
+                                </>
+                                :
+                                <>
+                                    <Signup/>
+                                    <p>Already have an account?
+                                        <span onClick={()=>setSignInOut(false)}>Sign in</span>
+                                    </p>
+                                </>
+                            }
+                        </>
+                    } 
+
+                </div>
             </div>
         }
 

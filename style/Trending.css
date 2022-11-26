@@ -1,7 +1,7 @@
 .trending {
     width: 100%;
     position: relative;
-    height: 30em;
+    height: 32em;
 }
 
 .trendingcontainer {
@@ -21,20 +21,6 @@
     overflow-x: scroll;
     padding-left: .5em;
 }
-
-/* .trending #toRight {
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
-    top: 43%;
-}
-
-.trending #toLeft {
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
-    top: 43%;
-} */
 
 .trendingsection::-webkit-scrollbar {
     display: none; /*Chrome*/

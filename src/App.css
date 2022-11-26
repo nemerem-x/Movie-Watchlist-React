@@ -30,7 +30,7 @@ input {
 }
 
 button {
-  padding: .7em 2em;
+  padding: .5em 1em;
   margin: 1em 0;
   font-size: 1rem;
   border: none;
@@ -114,7 +114,7 @@ nav {
 }
 
 .left input {
-  width: 100%;
+  width: 65%;
   /* height: 3em; */
 }
 
@@ -197,10 +197,19 @@ nav {
   width: 300px;
   padding: 2em;
   height: auto;
-  top: 60px;
+  top: 79px;
   right: 150px;
   z-index: 2;
   border-radius: 10px;
+}
+
+#signModalBg{
+  height: 100vh;
+  width: 100vw;
+  background-color: #42443c00;
+  position: absolute;
+  top: -0.5em;
+  z-index: 3;
 }
 
 .x {
@@ -331,7 +340,7 @@ button:disabled {
   z-index: 1;
   left: 11em;
   width: 40%;
-  bottom: 15%;
+  bottom: 5%;
 }
 
 .btns {
