@@ -1,6 +1,8 @@
 .movie {
     width: 185px;
     position: relative;
+    height: auto;
+    margin: 1em 0;
 }
 
 .movie img {
