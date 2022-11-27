@@ -1,0 +1,57 @@
+p, h2 {
+    color: var(--fontColor);
+}
+
+h1 {
+    color: var(--grey);
+}
+
+.MovieDetail {
+    width: 100%;
+    margin: 6em 0 5em 0;
+}
+
+.MovieDetailBox {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    gap: 2em;
+    margin-bottom: 5em;
+}
+
+.detailLeft {
+    width: 50%;
+}
+
+.detailRight {
+    height: 300px;
+    width: 50%;
+    border-radius: 10px;
+    background-color: var(--grey);
+}
+
+.reviewBox {
+    width: 80%;
+    margin: auto;
+
+}
+
+.review {
+    display: flex;
+    gap: 2em;
+}
+
+@media screen and (max-width:768px) {
+    .MovieDetailBox {
+        flex-direction: column;
+        width: 92%;
+    }
+
+    .detailLeft, .detailRight {
+        width: 100%;
+    }
+
+    .review {
+        flex-direction: column;
+    }
+}

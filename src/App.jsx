@@ -3,6 +3,7 @@ import Home from '../pages/Home'
 import Watchlist from '../pages/Watchlist'
 import LoginPage from '../pages/LoginPage'
 import Discover from '../pages/Discover'
+import MovieDetail from '../pages/MovieDetail'
 import Footer from '../components/Footer'
 import { Routes, Route } from "react-router-dom"
 import { useAuthState } from "react-firebase-hooks/auth"
@@ -22,9 +23,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
 
-          <Route exact path='/discover' 
-            element={<Discover/> } 
-          />
+          <Route exact path='/discover' element={<Discover/> }/>
+
+          <Route exact path='/movie/:id' element={<MovieDetail/> }/>
 
           <Route exact path='/watchlist' 
             element={!user ? <Navigate to="/login" replace /> : <Watchlist/> } 
@@ -35,7 +36,7 @@ function App() {
           />
 
           <Route exact path='*' 
-            element={<Navigate to="/watchlist" replace /> } 
+            element={<Navigate to="/" replace /> } 
           />
 
         </Routes>

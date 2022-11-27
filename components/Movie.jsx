@@ -1,12 +1,15 @@
 import React from 'react'
 import '../style/Movie.css'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Movie() {
 
+    const navigate = useNavigate()
     const [mouseIn, setMouseIn] = useState(false)
 
     const click = (e) => {
+      navigate(`/movie/${e.target.id}`)
       if(e.target.id == "add"){
         console.log("add to watchlist")
       } else {
