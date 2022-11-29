@@ -277,6 +277,7 @@ button:disabled {
 
 #spinner {
   width: 30px;
+  height: 100%;
   margin: 1em auto;
 }
 
@@ -415,6 +416,10 @@ button:disabled {
 
   .left nav {
     display: none;
+  }
+
+  .left input {
+    width: 100%;
   }
 
   .hamburger {

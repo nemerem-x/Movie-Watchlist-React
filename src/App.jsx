@@ -7,16 +7,19 @@ import MovieDetail from '../pages/MovieDetail'
 import Footer from '../components/Footer'
 import { Routes, Route } from "react-router-dom"
 import { useAuthState } from "react-firebase-hooks/auth"
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import {auth} from "../src/firebase"
 import { Navigate } from "react-router-dom"
 import Nav from '../components/Nav'
 
 function App() {
 
+  const queryClient = new QueryClient()
+
   const [user, loading] = useAuthState(auth)
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
     
         <Nav/>
 
@@ -43,7 +46,7 @@ function App() {
 
         <Footer/>
 
-    </>
+    </QueryClientProvider>
   )
 }
 

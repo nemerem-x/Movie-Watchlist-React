@@ -17,6 +17,7 @@
 
 .trendingsection {
     display: flex;
+    align-items: center;
     gap: 20px;
     overflow-x: scroll;
     padding-left: .5em;

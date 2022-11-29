@@ -2,8 +2,17 @@ import HeroImage from '/hero_image.png'
 import { useMediaQuery } from 'react-responsive'
 import { useState, useEffect } from 'react'
 import Loader from '/loading.svg'
+import { movieDataQuery } from '../src/getTrendingMovies'
 
 export default function Hero() {
+
+    const {data, isLoading, isError} = movieDataQuery()
+
+    // console.log(data?.results[0])
+    // const trending = data?.results.slice(0,18).map(movie => {
+    //     return 
+    // })
+
 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1000px)' })
     const [trailerIsOpen, setTrailerIsOpen] = useState(false)
@@ -27,9 +36,9 @@ export default function Hero() {
         alignItems: "center",
         width: "100%",
         height: isTabletOrMobile ? "72%" : "100%",
-        backgroundImage:`linear-gradient(to ${isTabletOrMobile ? "bottom" : "left"}, transparent, #12130C ${isTabletOrMobile ? "80%" : "70%"}), url(${HeroImage})`,
+        backgroundImage:`linear-gradient(to ${isTabletOrMobile ? "bottom" : "left"}, transparent, #12130C ${isTabletOrMobile ? "80%" : "70%"}), url(${`https://image.tmdb.org/t/p/original${data?.results[0].poster_path}`})`,
         backgroundSize: "cover",
-        backgroundPosition: isTabletOrMobile ? "center center" : "left top",
+        backgroundPosition: isTabletOrMobile ? "center top" : "left top",
         justifyContent: "center",
     }
 

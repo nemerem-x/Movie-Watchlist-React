@@ -2,19 +2,32 @@ import React from 'react'
 import '../style/Movie.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 
-export default function Movie() {
 
+export default function Movie({movie}) {
+  // console.log(movie)
+
+  const key = import.meta.env.VITE_APP_TMDB_KEY
+
+  const genre = async () => {
+    const genreData = await fetch(`https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=${key}`)
+    return genreData.json()
+  }
+  const {data, isLoading, isError} = useQuery(['genre'], genre)
+
+  const allGenre = data?.genres.filter(e => movie.genre_ids.includes(e.id)).slice(0,3)
+  
     const navigate = useNavigate()
     const [mouseIn, setMouseIn] = useState(false)
 
     const click = (e) => {
-      navigate(`/movie/${e.target.id}`)
-      if(e.target.id == "add"){
-        console.log("add to watchlist")
-      } else {
-        console.log("open movie")
-      }
+      // navigate(`/movie/${e.target.id}`)
+      // if(e.target.id == "add"){
+      //   console.log("add to watchlist")
+      // } else {
+      //   console.log("open movie")
+      // }
     }
 
   return (
@@ -27,13 +40,13 @@ export default function Movie() {
                 <path d="M16.442 15.4323V10.2709H15.1447V15.4323H10.6041V16.907H15.1447V22.0685H16.442V16.907H20.9826V15.4323H16.442Z" fill="white"/>
               </svg>
               <div className="rating">
-                <h3>8.2</h3>
+                <h3>{movie.vote_average.toFixed(1)}</h3>
               </div>
             </div>
           }
-          <img src="" alt="" />
-          <p>Action, Drama, Adventure</p>
-          <h2>Black Adam</h2>
+          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" />
+          <p>{allGenre?.map(item => item.name).join(", ")}</p>
+          <h2>{movie.original_title}</h2>
           <button id='movieAddToWatchlist' className="both">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.75 5.25V0H5.25V5.25H0V6.75H5.25V12H6.75V6.75H12V5.25H6.75Z" fill="white"/>

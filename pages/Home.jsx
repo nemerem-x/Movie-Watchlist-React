@@ -7,13 +7,27 @@ import Trending from "../components/Trending"
 import Watchlist from "../components/Watchlist"
 import Genre from "../components/Genre"
 import NowPlaying from "../components/NowPlaying"
+import { movieDataQuery } from '../src/getTrendingMovies'
+import { moviesSelected } from "../src/getTrendingMovies"
 
 export default function Home() {
+
+    const [expand, setExpand] = useState(false)
+    const [selectedOption, setSelectedOption] = useState("upcoming")
+
+    const selectOption = (e) => {
+        setSelectedOption(e.currentTarget.textContent)
+        setExpand(false)
+        refetch()
+    }
+
+    const {data: trending, isLoading, isError} = movieDataQuery()
+    const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption)
 
     const [user, loading] = useAuthState(auth)
     const [data, setData] = useState([])
 
-    console.log(data)
+    // console.log(data)
 
     const items = [
         "Black Adam",
@@ -83,9 +97,22 @@ export default function Home() {
     return (
         <>
             <Hero/>
-            <Trending/>
+            <Trending>
+                {trending}
+                {isError}
+                {isLoading}
+            </Trending>
             <Watchlist/>
-            <Genre/>
+            <Genre>
+                {selected}
+                {load}
+                {error}
+                {selectedOption}
+                {selectOption}
+                {refetch}
+                {expand}
+                {setExpand}
+            </Genre>
             <NowPlaying/>
         </>
     )
