@@ -281,6 +281,10 @@ button:disabled {
   margin: 1em auto;
 }
 
+#errormessage {
+  color: red;
+}
+
 .logout {
   color: var(--fontColorFaded);
 }

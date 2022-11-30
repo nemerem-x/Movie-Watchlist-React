@@ -7,8 +7,8 @@ import Trending from "../components/Trending"
 import Watchlist from "../components/Watchlist"
 import Genre from "../components/Genre"
 import NowPlaying from "../components/NowPlaying"
-import { movieDataQuery } from '../src/getTrendingMovies'
-import { moviesSelected } from "../src/getTrendingMovies"
+import { movieDataQuery } from '../src/reactQueries'
+import { moviesSelected } from "../src/reactQueries"
 
 export default function Home() {
 

@@ -1,18 +1,13 @@
 import '../style/Trending.css'
 import Movie from './Movie'
 import { useRef } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { async } from '@firebase/util'
 import Loader from '/loading.svg'
-// import { movieDataQuery } from '../src/getTrendingMovies'
 
 export default function Trending({children}) {
 
-  // const {data, isLoading, isError} = movieDataQuery()
-
-  const trending = children[0]?.results.slice(0,18).map(movie => {
+  const trending = children ? children[0]?.results.slice(0,18).map(movie => {
     return <Movie key={movie.id} movie={movie}/>
-  })
+  }) : []
 
   const scrollable = useRef(null)
   const scrollIt = (toRight) => {

@@ -2,8 +2,9 @@ import HeroImage from '/hero_image.png'
 import { useMediaQuery } from 'react-responsive'
 import { useState, useEffect } from 'react'
 import Loader from '/loading.svg'
-import { movieDataQuery } from '../src/getTrendingMovies'
-import { genreData } from '../src/getTrendingMovies'
+import { movieDataQuery } from '../src/reactQueries'
+import { genreData } from '../src/reactQueries'
+import { videoData } from '../src/reactQueries'
 
 
 export default function Hero() {
@@ -11,9 +12,14 @@ export default function Hero() {
     //react-query
     const {data, isLoading, isError} = movieDataQuery()
     const {data: genre, isLoading: loading, isError: error} = genreData()
+
+    console.log(isLoading, isError)
     
     const trending = data ? data.results.slice(0,3) : []
-    const allGenre = genre ? genre.genres.filter(e => trending[0].genre_ids.includes(e.id)).slice(0,3) : []
+    const allGenre = genre ? genre.genres.filter(e => trending[0]?.genre_ids.includes(e.id)).slice(0,3) : []
+    
+    //react query
+    const {data: videodata, isLoading: videoloading, isError: videoerror} = videoData(trending[0]?.id)
 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1000px)' })
     const [trailerIsOpen, setTrailerIsOpen] = useState(false)
@@ -59,7 +65,30 @@ export default function Hero() {
     }
 
     if(isError) {
-        return <p>Something went wrong</p>
+        return <p id='errormessage'>Something went wrong</p>
+    }
+
+    //youtube link error handling
+    const youtube = () => {
+        if(videoloading) {
+            return <img id='spinner' src={Loader} alt="loading..." />
+        }
+
+        if(videoerror) {
+            return <p id='errormessage'>Something went wrong</p>
+        }
+
+        if(videodata.results){
+            return (
+                <iframe
+                    style={{width: isTabletOrMobile ? "90%" : "50%", height: isTabletOrMobile ? "40%" : "60%", zIndex:"1"}} 
+                    width="1920" height="1080" 
+                    src={`https://www.youtube.com/embed/${videodata?.results[0].key}?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1`} title="YouTube video player" frameBorder="0" allowFullScreen>
+                </iframe>
+            )
+        } else if (!videodata.results) {
+                return <p id='errormessage'>Something went wrong</p>
+        }
     }
 
   return (
@@ -68,11 +97,9 @@ export default function Hero() {
         {
             trailerIsOpen &&
             <div onClick={()=>setTrailerIsOpen(false)} style={video} className="video">
-                <iframe
-                    style={{width: isTabletOrMobile ? "90%" : "50%", height: isTabletOrMobile ? "40%" : "60%", zIndex:"1"}} 
-                    width="1920" height="1080" 
-                    src="https://www.youtube.com/embed/mkomfZHG5q4?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1" title="YouTube video player" frameBorder="0" allowFullScreen>
-                </iframe>
+
+                {youtube()}
+
                 <img 
                     style={{position: "absolute", transform: "translate(-50%, -50%)", top:"50%", left:"50%"}} 
                     id='spinner' src={Loader} alt="loading..." 

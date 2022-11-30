@@ -22,3 +22,11 @@ import { useQuery } from '@tanstack/react-query'
     return genreData.json()
   }
   export const genreData = () => useQuery(['genre'], genre)
+
+
+  const videos = async ({queryKey}) => {
+    const [_, id] = queryKey
+    const genreData = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${key}`)
+    return genreData.json()
+  }
+  export const videoData = (id) => useQuery(['videos', id], videos)

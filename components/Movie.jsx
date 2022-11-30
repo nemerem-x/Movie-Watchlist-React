@@ -2,7 +2,7 @@ import React from 'react'
 import '../style/Movie.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { genreData } from '../src/getTrendingMovies'
+import { genreData } from '../src/reactQueries'
 
 export default function Movie({movie}) {
 
