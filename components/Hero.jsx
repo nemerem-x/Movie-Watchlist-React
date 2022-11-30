@@ -3,16 +3,17 @@ import { useMediaQuery } from 'react-responsive'
 import { useState, useEffect } from 'react'
 import Loader from '/loading.svg'
 import { movieDataQuery } from '../src/getTrendingMovies'
+import { genreData } from '../src/getTrendingMovies'
+
 
 export default function Hero() {
-
+    
+    //react-query
     const {data, isLoading, isError} = movieDataQuery()
-
-    // console.log(data?.results[0])
-    // const trending = data?.results.slice(0,18).map(movie => {
-    //     return 
-    // })
-
+    const {data: genre, isLoading: loading, isError: error} = genreData()
+    
+    const trending = data ? data.results.slice(0,3) : []
+    const allGenre = genre ? genre.genres.filter(e => trending[0].genre_ids.includes(e.id)).slice(0,3) : []
 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1000px)' })
     const [trailerIsOpen, setTrailerIsOpen] = useState(false)
@@ -36,7 +37,7 @@ export default function Hero() {
         alignItems: "center",
         width: "100%",
         height: isTabletOrMobile ? "72%" : "100%",
-        backgroundImage:`linear-gradient(to ${isTabletOrMobile ? "bottom" : "left"}, transparent, #12130C ${isTabletOrMobile ? "80%" : "70%"}), url(${`https://image.tmdb.org/t/p/original${data?.results[0].poster_path}`})`,
+        backgroundImage:`linear-gradient(to ${isTabletOrMobile ? "bottom" : "left"}, transparent, #12130C ${isTabletOrMobile ? "80%" : "70%"}), url(${`https://image.tmdb.org/t/p/original${trending[0]?.poster_path}`})`,
         backgroundSize: "cover",
         backgroundPosition: isTabletOrMobile ? "center top" : "left top",
         justifyContent: "center",
@@ -51,6 +52,14 @@ export default function Hero() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+    }
+
+    if(isLoading) {
+        return <img id='spinner' src={Loader} alt="loading" />
+    }
+
+    if(isError) {
+        return <p>Something went wrong</p>
     }
 
   return (
@@ -73,14 +82,9 @@ export default function Hero() {
 
         <div className="heroInfo">
             <div className="heroDetails">
-                <h1>Black Adam</h1>
-                <p><span>8.2</span> 8.256 / 2369 votes     160 mins   -   Action, Drama, Adventure    -   2022</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing 
-                    elit, sed do eiusmod tempor incididunt ut labore 
-                    et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut 
-                    aliquip...
-                </p>
+                <h1>{trending[0]?.original_title}</h1>
+                <p><span>{trending[0]?.vote_average.toFixed(1)}</span> {allGenre.map(item => item.name).join(', ')}</p>
+                <p>{trending[0]?.overview}</p>
                 <div className="btns">
                     <button id='btnDetails'>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

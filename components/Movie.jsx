@@ -2,19 +2,11 @@ import React from 'react'
 import '../style/Movie.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-
+import { genreData } from '../src/getTrendingMovies'
 
 export default function Movie({movie}) {
-  // console.log(movie)
 
-  const key = import.meta.env.VITE_APP_TMDB_KEY
-
-  const genre = async () => {
-    const genreData = await fetch(`https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=${key}`)
-    return genreData.json()
-  }
-  const {data, isLoading, isError} = useQuery(['genre'], genre)
+  const {data, isLoading, isError} = genreData()
 
   const allGenre = data?.genres.filter(e => movie.genre_ids.includes(e.id)).slice(0,3)
   
