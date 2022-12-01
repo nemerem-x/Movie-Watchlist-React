@@ -12,14 +12,6 @@ export default function Hero() {
     //react-query
     const {data, isLoading, isError} = movieDataQuery()
     const {data: genre, isLoading: loading, isError: error} = genreData()
-
-    // if(data){
-    //     if('success' in data) {
-    //         console.log("error")
-    //     } else if ('results' in data){
-    //         console.log("good")
-    //     }
-    // }
     
     const trending = data ? data.results.slice(0,3) : []
     const allGenre = genre ? genre.genres.filter(e => trending[0]?.genre_ids.includes(e.id)).slice(0,3) : []
@@ -116,7 +108,7 @@ export default function Hero() {
         <div className="heroInfo">
             <div className="heroDetails">
                 <h1>{trending[0]?.original_title}</h1>
-                <p><span>{trending[0]?.vote_average.toFixed(1)}</span> {allGenre.map(item => item.name).join(', ')}</p>
+                <p><span>{trending[0]?.vote_average.toFixed(1)}</span> {allGenre.map(item => item.name).join(', ')} - {trending[0]?.release_date.slice(0,4)}</p>
                 <p>{trending[0]?.overview}</p>
                 <div className="btns">
                     <button id='btnDetails'>

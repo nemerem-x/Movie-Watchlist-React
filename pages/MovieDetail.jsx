@@ -1,17 +1,23 @@
 import '../style/MovieDetail.css'
 import { useParams } from 'react-router-dom'
+import { movieFullData } from '../src/reactQueries'
+
 
 export default function MovieDetail() {
-
+    
     const params = useParams()
+
+    const {data, isLoading, isError} = movieFullData(params.id)
+
+    console.log(data)
 
     return (
     <div className='MovieDetail'>
         <div className="MovieDetailBox">
             <div className="detailLeft">
                 <p>8.2</p>
-                <h2>Black Adam</h2>
-                <p>160 mins - Action, Drama, Adventure - 2022</p>
+                <h2>{data?.original_title}</h2>
+                <p>{data?.runtime} mins - {data.genres.map(item => item.name).join(", ")} - {data?.release_date.slice(0,4)}</p>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur 
                     adipiscing elit, sed do eiusmod tempor incididunt

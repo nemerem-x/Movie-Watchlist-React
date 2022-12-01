@@ -37,3 +37,11 @@ import { useQuery } from '@tanstack/react-query'
     return nowPlayingData.json()
   }
   export const nowPlayingData = () => useQuery(['nowPlaying'], nowPlaying)
+
+
+  const movie = async ({queryKey}) => {
+    const [_, id] = queryKey
+    const movieFullData = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${key}`)
+    return movieFullData.json()
+  }
+  export const movieFullData = (id) => useQuery(['movie', id], movie)
