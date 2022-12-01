@@ -1,13 +1,29 @@
 .nowplayingmovie {
     width: 390px;
     position: relative;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 .nowplayingmovie img {
     width: 390px;
-    height: 276px;
+    height: 219.38px;
     border-radius: 10px;
-    background-color: red;
+    background-color: #000;
+}
+
+.nowplayingmovie iframe {
+    width: 390px;
+    height: 219.38px;
+    border-radius: 10px;
+    /* background-color: red; */
+}
+
+.closeVideo {
+    background-color: #000;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 10px;
 }
 
 .nowplayingmovie p, h2 {
@@ -17,6 +33,7 @@
 
 .nowplayingmovie p {
     font-size: 0.7rem;
+    padding-top: .5em;
     color: var(--secondaryColor);
 }
 
@@ -24,6 +41,10 @@
     font-size: 1rem;
     padding: .3em 0;
     height: 3em;
+}
+
+.nowplayingmovie h2:hover {
+    text-decoration: underline;
 }
 
 .nowplayingmovie h3 {
@@ -55,6 +76,8 @@
 }
 
 .playing {
+    width: 390px;
+    height: 219.38px;
     position: relative;
 }
 

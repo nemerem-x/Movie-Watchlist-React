@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query'
     return data.json()
   }
   export const movieDataQuery = () => useQuery(['trending'], trendingData)
-
+  
 
   const movies = async ({queryKey}) => {
     const [_, selected] = queryKey
@@ -26,7 +26,14 @@ import { useQuery } from '@tanstack/react-query'
 
   const videos = async ({queryKey}) => {
     const [_, id] = queryKey
-    const genreData = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${key}`)
-    return genreData.json()
+    const videoData = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${key}`)
+    return videoData.json()
   }
   export const videoData = (id) => useQuery(['videos', id], videos)
+
+
+  const nowPlaying = async () => {
+    const nowPlayingData = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${key}`)
+    return nowPlayingData.json()
+  }
+  export const nowPlayingData = () => useQuery(['nowPlaying'], nowPlaying)

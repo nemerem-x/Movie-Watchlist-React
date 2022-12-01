@@ -14,7 +14,13 @@ import Nav from '../components/Nav'
 
 function App() {
 
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  })
 
   const [user, loading] = useAuthState(auth)
 

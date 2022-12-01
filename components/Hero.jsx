@@ -13,7 +13,13 @@ export default function Hero() {
     const {data, isLoading, isError} = movieDataQuery()
     const {data: genre, isLoading: loading, isError: error} = genreData()
 
-    console.log(isLoading, isError)
+    // if(data){
+    //     if('success' in data) {
+    //         console.log("error")
+    //     } else if ('results' in data){
+    //         console.log("good")
+    //     }
+    // }
     
     const trending = data ? data.results.slice(0,3) : []
     const allGenre = genre ? genre.genres.filter(e => trending[0]?.genre_ids.includes(e.id)).slice(0,3) : []

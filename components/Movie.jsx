@@ -3,6 +3,7 @@ import '../style/Movie.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { genreData } from '../src/reactQueries'
+import { Link } from 'react-router-dom'
 
 export default function Movie({movie}) {
 
@@ -14,20 +15,25 @@ export default function Movie({movie}) {
     const [mouseIn, setMouseIn] = useState(false)
 
     const click = (e) => {
-      // navigate(`/movie/${e.target.id}`)
-      // if(e.target.id == "add"){
-      //   console.log("add to watchlist")
-      // } else {
-      //   console.log("open movie")
-      // }
+      if(e.target.id === "add" || e.target.id === "movieAddToWatchlist") {
+        console.log("add")
+      } else {
+        navigate(`/movie/${movie.id}`)
+      }
     }
 
+    // const addToWatchlist = (e) => {
+    //   if(e.currentTarget.id === "add") {
+    //     console.log("add")
+    //   }
+    // }
+
   return (
-        <div onClick={(e)=>click(e)} className="movie" onMouseEnter={()=>setMouseIn(true)} onMouseLeave={()=>setMouseIn(false)}>
+        <div className="movie" onMouseEnter={()=>setMouseIn(true)} onMouseLeave={()=>setMouseIn(false)}>
           {
             mouseIn &&
-            <div className="overlay">
-              <svg id='add' width="29" height="29" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div onClick={(e)=>click(e)} className="overlay">
+              <svg onClick={(e)=>click(e)} id='add' width="29" height="29" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.2257 1.25269H21.9715C26.9421 1.25269 30.9715 5.28212 30.9715 10.2527V22C30.9715 26.9706 26.9421 31 21.9715 31H10.2257C5.25515 31 1.22571 26.9706 1.22571 22V10.2527C1.22571 5.28212 5.25515 1.25269 10.2257 1.25269Z" stroke="white" strokeWidth="2"/>
                 <path d="M16.442 15.4323V10.2709H15.1447V15.4323H10.6041V16.907H15.1447V22.0685H16.442V16.907H20.9826V15.4323H16.442Z" fill="white"/>
               </svg>
@@ -36,10 +42,10 @@ export default function Movie({movie}) {
               </div>
             </div>
           }
-          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" />
+          <img onClick={click} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="poster" />
           <p>{allGenre?.map(item => item.name).join(", ")}</p>
-          <h2>{movie.original_title}</h2>
-          <button id='movieAddToWatchlist' className="both">
+          <Link to={`/movie/${movie.id}`}><h2>{movie.original_title}</h2></Link> 
+          <button onClick={(e)=>click(e)} id='movieAddToWatchlist' className="both">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.75 5.25V0H5.25V5.25H0V6.75H5.25V12H6.75V6.75H12V5.25H6.75Z" fill="white"/>
               </svg>

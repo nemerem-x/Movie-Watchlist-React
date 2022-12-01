@@ -1,30 +1,58 @@
 import React from 'react'
 import '../style/NowplayingMovie.css'
 import { useState } from 'react'
+import { videoData } from '../src/reactQueries'
+import { genreData } from '../src/reactQueries'
+import { Link } from 'react-router-dom'
 
-export default function NowplayingMovie() {
+export default function NowplayingMovie({item}) {
 
-    const [mouseIn, setMouseIn] = useState(false)
+  const {data, isLoading, isError} = genreData()
+  const allGenre = data?.genres.filter(e => item.genre_ids.includes(e.id)).slice(0,3)
 
-    const click = (e) => {
-      if(e.target.id){
-        console.log("add to watchlist")
-      } else {
-        console.log("open movie")
-      }
+  const {data: videodata, isLoading: videoloading, isError: videoerror} = videoData(item?.id)
+  // console.log(item)
+
+  const [mouseIn, setMouseIn] = useState(false)
+  const [playVideo, setPlayVideo] = useState(false)
+
+  const play = ()  => {
+
+  }
+
+  const click = (e) => {
+    if(e.target.id){
+      console.log("add to watchlist")
+    } else {
+      console.log("open movie")
     }
+  }
 
   return (
         <div onClick={(e)=>click(e)} className="nowplayingmovie" onMouseEnter={()=>setMouseIn(true)} onMouseLeave={()=>setMouseIn(false)}>
           <div className="playing">
-              <svg id='play' width="100" height="100" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {
+              playVideo ?
+              <>
+              <div onClick={()=>setPlayVideo(false)} className="closeVideo"></div>
+              <iframe
+                  width="1920" height="1080" 
+                  src={`https://www.youtube.com/embed/${videodata?.results[0].key}?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1`} title="YouTube video player" frameBorder="0" allowFullScreen>
+              </iframe>
+              </>
+              :
+              <>
+              <svg onClick={()=>setPlayVideo(true)} id='play' width="100" height="100" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M218.75 125C218.75 73.2422 176.758 31.25 125 31.25C73.2422 31.25 31.25 73.2422 31.25 125C31.25 176.758 73.2422 218.75 125 218.75C176.758 218.75 218.75 176.758 218.75 125Z" stroke={mouseIn ? "#CCFF00" : "white"} strokeWidth="10" strokeMiterlimit="10"/>
                   <path d="M105.625 163.301L161.509 129.541C162.288 129.066 162.932 128.399 163.378 127.604C163.825 126.809 164.06 125.912 164.06 125C164.06 124.088 163.825 123.191 163.378 122.396C162.932 121.601 162.288 120.934 161.509 120.459L105.625 86.6992C104.824 86.2193 103.91 85.9611 102.976 85.9512C102.042 85.9412 101.123 86.1798 100.312 86.6425C99.5005 87.1052 98.8271 87.7753 98.3605 88.5841C97.8939 89.393 97.6508 90.3113 97.6562 91.2451V158.755C97.6508 159.689 97.8939 160.607 98.3605 161.416C98.8271 162.225 99.5005 162.895 100.312 163.357C101.123 163.82 102.042 164.059 102.976 164.049C103.91 164.039 104.824 163.781 105.625 163.301Z" fill={mouseIn ? "#CCFF00" : "white"}/>
               </svg>
-              <img src="" alt="" />
+              <img src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`} alt="backdrop" />
+              </>
+            }
+
           </div>
-          <p>Action, Drama, Adventure</p>
-          <h2>Black Adam</h2>
+          <p>{allGenre?.map(item => item.name).join(", ")}</p>
+          <Link to={`/movie/${item?.id}`}><h2>{item?.original_title}</h2></Link>
           <button id='movieAddToWatchlist' className="both">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.75 5.25V0H5.25V5.25H0V6.75H5.25V12H6.75V6.75H12V5.25H6.75Z" fill="white"/>
