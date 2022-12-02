@@ -48,6 +48,8 @@ function App() {
 
             <Route exact path='/discover' element={<Discover/> }/>
 
+            <Route exact path='/discover/:page' element={<Discover/> }/>
+
             <Route exact path='/movie/:id' element={<MovieDetail/> }/>
 
             <Route exact path='/watchlist' 

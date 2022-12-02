@@ -9,12 +9,12 @@ import { useQuery } from '@tanstack/react-query'
   export const movieDataQuery = () => useQuery(['trending'], trendingData)
   
 
-  const movies = async ({queryKey}) => {
+  const movieSelect = async ({queryKey}) => {
     const [_, selected] = queryKey
     const data = await fetch(`https://api.themoviedb.org/3/movie/${selected}?api_key=${key}&language=en-US&page=1`)
     return data.json()
   }
-  export const moviesSelected = (selected) => useQuery(['selected', selected], movies)
+  export const moviesSelected = (selected) => useQuery(['selected', selected], movieSelect)
 
 
   const genre = async () => {
@@ -45,3 +45,10 @@ import { useQuery } from '@tanstack/react-query'
     return movieFullData.json()
   }
   export const movieFullData = (id) => useQuery(['movie', id], movie)
+
+
+  const discover = async () => {
+    const data = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&page=1`)
+    return data.json()
+  }
+  export const discoverData = () => useQuery(['discover'], discover)

@@ -1,22 +1,20 @@
 import '../style/Discover.css'
 import Movie from "../components/Movie"
+import { discoverData } from '../src/reactQueries'
 
 export default function Discover() {
+
+  const {data, isLoading, isError} = discoverData()
+  console.log(data)
+  const discover = data?.results.map(movie => {
+    return <Movie key={movie.id} movie={movie}/>
+  })
   return (
     <div className='discover'>
       <h1>Discover Movies</h1>
 
       <div className="discovermovies">
-        {/* <Movie/>
-        <Movie/>
-        <Movie/>
-        <Movie/>
-        <Movie/>
-        <Movie/>
-        <Movie/>
-        <Movie/>
-        <Movie/>
-        <Movie/> */}
+        {discover}
       </div>
 
       <div className="paginationbox">
