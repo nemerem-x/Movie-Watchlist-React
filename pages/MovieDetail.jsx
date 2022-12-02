@@ -1,6 +1,7 @@
 import '../style/MovieDetail.css'
 import { useParams } from 'react-router-dom'
 import { movieFullData } from '../src/reactQueries'
+import Loader from '/loading.svg'
 
 
 export default function MovieDetail() {
@@ -9,28 +10,26 @@ export default function MovieDetail() {
 
     const {data, isLoading, isError} = movieFullData(params.id)
 
-    console.log(data)
+    if(isLoading) {
+        return (
+            <div className="spinnerbox">
+                <img id='spinner' src={Loader} alt="loading" />
+            </div>
+        )
+    }
+
+    if (isError){
+        return <p id='errormessage'>Something went wrong</p>
+    }
 
     return (
     <div className='MovieDetail'>
         <div className="MovieDetailBox">
             <div className="detailLeft">
-                <p>8.2</p>
+                <p>{data?.vote_average.toFixed(1)}</p>
                 <h2>{data?.original_title}</h2>
-                <p>{data?.runtime} mins - {data.genres.map(item => item.name).join(", ")} - {data?.release_date.slice(0,4)}</p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt
-                     ut labore et dolore magna aliqua. Ut enim ad minim
-                      veniam, quis nostrud exercitation ullamco laboris
-                       nisi ut aliquip...
-
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                     elit, sed do eiusmod tempor incididunt ut labore 
-                     et dolore magna aliqua. Ut enim ad minim veniam, 
-                     quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip...
-                </p>
+                <p>{data?.runtime} mins - {data?.genres.map(item => item.name).join(", ")} - {data?.release_date.slice(0,4)}</p>
+                <p>{data?.overview}</p>
                 <div className="detailLeftInteraction">
                     <button>
                         <svg width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">

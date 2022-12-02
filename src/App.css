@@ -275,6 +275,14 @@ button:disabled {
   margin-bottom: 1em;
 }
 
+.spinnerbox {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #spinner {
   width: 30px;
   height: 100%;
@@ -308,6 +316,11 @@ button:disabled {
   text-decoration: none;
 }
 
+
+.pageContainer {
+  position: relative;
+  min-height: 100vh;
+}
 /* Hero ----------------------------------------------------- */
 .heroInfo {
   width: 50%;

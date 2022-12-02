@@ -5,11 +5,13 @@ import LoginPage from '../pages/LoginPage'
 import Discover from '../pages/Discover'
 import MovieDetail from '../pages/MovieDetail'
 import Footer from '../components/Footer'
+import { useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import {auth} from "../src/firebase"
 import { Navigate } from "react-router-dom"
+import { useLocation } from "react-router-dom";
 import Nav from '../components/Nav'
 
 function App() {
@@ -22,6 +24,16 @@ function App() {
     },
   })
 
+  function ScrollToTop() {
+    const { pathname } = useLocation();
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+  
+    return null;
+  }
+
   const [user, loading] = useAuthState(auth)
 
   return (
@@ -29,26 +41,29 @@ function App() {
     
         <Nav/>
 
-        <Routes>
-          <Route path='/' element={<Home/>} />
+        <div className="pageContainer">
+          <Routes>
+            {ScrollToTop()}
+            <Route path='/' element={<Home/>} />
 
-          <Route exact path='/discover' element={<Discover/> }/>
+            <Route exact path='/discover' element={<Discover/> }/>
 
-          <Route exact path='/movie/:id' element={<MovieDetail/> }/>
+            <Route exact path='/movie/:id' element={<MovieDetail/> }/>
 
-          <Route exact path='/watchlist' 
-            element={!user ? <Navigate to="/login" replace /> : <Watchlist/> } 
-          />
+            <Route exact path='/watchlist' 
+              element={!user ? <Navigate to="/login" replace /> : <Watchlist/> } 
+            />
 
-          <Route exact path='/login'
-            element={!user ? <LoginPage/> : <Navigate to="/watchlist" replace /> } 
-          />
+            <Route exact path='/login'
+              element={!user ? <LoginPage/> : <Navigate to="/watchlist" replace /> } 
+            />
 
-          <Route exact path='*' 
-            element={<Navigate to="/" replace /> } 
-          />
+            <Route exact path='*' 
+              element={<Navigate to="/" replace /> } 
+            />
 
-        </Routes>
+          </Routes>
+        </div>
 
         <Footer/>
 

@@ -50,16 +50,21 @@ export default function Hero() {
     const video = {
         height: "100vh",
         width: "100vw",
-        position: "fixed",
+        position: "absolute",
         zIndex: "2",
         backgroundColor: "rgb(0,0,0,0.5)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        top: "0",
     }
 
     if(isLoading) {
-        return <img id='spinner' src={Loader} alt="loading" />
+        return (
+            <div className="spinnerbox">
+                <img id='spinner' src={Loader} alt="loading" />
+            </div>
+        )
     }
 
     if(isError) {

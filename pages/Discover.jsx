@@ -7,6 +7,7 @@ export default function Discover() {
       <h1>Discover Movies</h1>
 
       <div className="discovermovies">
+        {/* <Movie/>
         <Movie/>
         <Movie/>
         <Movie/>
@@ -15,8 +16,7 @@ export default function Discover() {
         <Movie/>
         <Movie/>
         <Movie/>
-        <Movie/>
-        <Movie/>
+        <Movie/> */}
       </div>
 
       <div className="paginationbox">

@@ -9,13 +9,13 @@ export default function Watchlist() {
         <div className="watchlistbox">
             <h1>My Watchlist</h1>
             <div className="watchlistcontainer">
+                {/* <Movie/>
                 <Movie/>
                 <Movie/>
                 <Movie/>
                 <Movie/>
                 <Movie/>
-                <Movie/>
-                <Movie/>
+                <Movie/> */}
             </div>
         </div>
     )
