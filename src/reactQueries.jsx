@@ -47,8 +47,9 @@ import { useQuery } from '@tanstack/react-query'
   export const movieFullData = (id) => useQuery(['movie', id], movie)
 
 
-  const discover = async () => {
-    const data = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&page=1`)
+  const discover = async ({queryKey}) => {
+    const [_, page] = queryKey
+    const data = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&page=${page}`)
     return data.json()
   }
-  export const discoverData = () => useQuery(['discover'], discover)
+  export const discoverData = (page) => useQuery(['discover', page], discover)
