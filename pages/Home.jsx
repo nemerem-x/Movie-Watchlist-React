@@ -5,7 +5,7 @@ import { doc, setDoc, onSnapshot  } from "firebase/firestore"
 import Hero from "../components/Hero"
 import Trending from "../components/Trending"
 import Watchlist from "../components/Watchlist"
-import Genre from "../components/Genre"
+import Category from "../components/Category"
 import NowPlaying from "../components/NowPlaying"
 import { movieDataQuery } from '../src/reactQueries'
 import { moviesSelected } from "../src/reactQueries"
@@ -103,7 +103,7 @@ export default function Home() {
                 {isLoading}
             </Trending>
             <Watchlist/>
-            <Genre>
+            <Category>
                 {selected}
                 {load}
                 {error}
@@ -112,7 +112,7 @@ export default function Home() {
                 {refetch}
                 {expand}
                 {setExpand}
-            </Genre>
+            </Category>
             <NowPlaying/>
         </>
     )

@@ -3,6 +3,7 @@ import Movie from "../components/Movie"
 import { discoverData } from '../src/reactQueries'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import Loader from '/loading.svg'
 
 
 export default function Discover() {
@@ -30,6 +31,12 @@ export default function Discover() {
     <div className='discover'>
       <h1>Discover Movies</h1>
 
+        {isLoading && 
+          <div className="spinnerbox">
+            <img id='spinner' src={Loader} alt="loading" />
+          </div>
+        }
+
       <div className="discovermovies">
         {discover}
       </div>
@@ -45,9 +52,10 @@ export default function Discover() {
           </div>
 
           <div className="numbers">
-            <p>1</p>
-            <p>2</p>
-            <p>3</p>
+            { data?.page > 1 && <p>{data?.page - 1}</p>}
+            <p style={{color: "#CCFF00"}}>{data?.page}</p>
+            <p>{data?.page + 1}</p>
+            { data?.page === 1 && <p>{data?.page + 2}</p>}
           </div>
 
           <div className="next" onClick={next}>

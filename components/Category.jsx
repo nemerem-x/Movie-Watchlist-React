@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
-import '../style/Genre.css'
+import '../style/Category.css'
 import Movie from './Movie'
 import Loader from '/loading.svg'
 
-export default function Genre({children}) {
+export default function Category({children}) {
 
     const expand = children[6]
     const setExpand = children[7]

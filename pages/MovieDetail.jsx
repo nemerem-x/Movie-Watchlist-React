@@ -1,14 +1,24 @@
 import '../style/MovieDetail.css'
 import { useParams } from 'react-router-dom'
 import { movieFullData } from '../src/reactQueries'
+import { videoData } from '../src/reactQueries'
 import Loader from '/loading.svg'
-
 
 export default function MovieDetail() {
     
     const params = useParams()
 
     const {data, isLoading, isError} = movieFullData(params.id)
+
+    const {data: videodata, isLoading: videoloading, isError: videoerror} = videoData(data?.id)
+
+    const click = (e) => {
+        if(e.target.id === "add" || e.target.id === "movieAddToWatchlist") {
+            console.log("add")
+        } else {
+            navigate(`/movie/${movie.id}`)
+        }
+    }
 
     if(isLoading) {
         return (
@@ -24,28 +34,48 @@ export default function MovieDetail() {
 
     return (
     <div className='MovieDetail'>
-        <div className="MovieDetailBox">
-            <div className="detailLeft">
-                <p>{data?.vote_average.toFixed(1)}</p>
+        <div className="titlebox">
+            <div className="titleboxleft">
                 <h2>{data?.original_title}</h2>
-                <p>{data?.runtime} mins - {data?.genres.map(item => item.name).join(", ")} - {data?.release_date.slice(0,4)}</p>
-                <p>{data?.overview}</p>
-                <div className="detailLeftInteraction">
-                    <button>
-                        <svg width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.80741 14.7915C1.41235 15.0537 1.01215 15.0686 0.606815 14.8363C0.202272 14.6047 0 14.2469 0 13.7628V1.23751C0 0.753443 0.202272 0.395231 0.606815 0.162877C1.01215 -0.0686696 1.41235 -0.0533406 1.80741 0.208864L11.4667 6.47152C11.8222 6.71356 12 7.05644 12 7.50017C12 7.9439 11.8222 8.28678 11.4667 8.52882L1.80741 14.7915Z" fill="#42443C"/>
-                        </svg>
-                        Trailer
-                    </button>
-                    <svg id='add' width="29" height="29" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.2257 1.25269H21.9715C26.9421 1.25269 30.9715 5.28212 30.9715 10.2527V22C30.9715 26.9706 26.9421 31 21.9715 31H10.2257C5.25515 31 1.22571 26.9706 1.22571 22V10.2527C1.22571 5.28212 5.25515 1.25269 10.2257 1.25269Z" stroke="white" strokeWidth="2"/>
-                        <path d="M16.442 15.4323V10.2709H15.1447V15.4323H10.6041V16.907H15.1447V22.0685H16.442V16.907H20.9826V15.4323H16.442Z" fill="white"/>
+                <p>{data?.runtime}mins - {data?.release_date.slice(0,4)}</p>
+            </div>
+            <div className="titleboxright">
+                <p>{data?.vote_average.toFixed(1)}</p>
+                <button onClick={(e)=>click(e)} id='movieAddToWatchlist' className="both">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.75 5.25V0H5.25V5.25H0V6.75H5.25V12H6.75V6.75H12V5.25H6.75Z" fill="white"/>
                     </svg>
+                    Watchlist
+                </button>
+            </div>
+        </div>
+
+        <div className="MovieDetailBox">
+            <div className="video">
+                <iframe
+                width="1920" height="1080" 
+                src={`https://www.youtube.com/embed/${videodata?.results[0].key}?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1`} title="YouTube video player" frameBorder="0" allowFullScreen>
+                </iframe>
+            </div>
+            <img src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`} alt="poster" />
+        </div>
+
+        <div className="otherdetails">
+        <div className="otherdetailsleft">
+                <img src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`} alt="poster" />
+                <div className="detailLeft">
+                    <div className="allgenres">
+                        {data?.genres.map(item => <p>{item.name}</p>)}
+                    </div>
+                    <p>{data?.overview}</p>
                 </div>
             </div>
-
-            <div className="detailRight">
-
+            <div className="otherdetailsright">
+                <div className="detailright">
+                    <div className="allgenres">
+                        {data?.genres.map(item => <p>{item.name}</p>)}
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -73,6 +103,7 @@ export default function MovieDetail() {
                 </div>
             </div>
         </div>
+
     </div>
   )
 }

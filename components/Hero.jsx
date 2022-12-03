@@ -5,9 +5,12 @@ import Loader from '/loading.svg'
 import { movieDataQuery } from '../src/reactQueries'
 import { genreData } from '../src/reactQueries'
 import { videoData } from '../src/reactQueries'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 export default function Hero() {
+
+    const navigate = useNavigate()
     
     //react-query
     const {data, isLoading, isError} = movieDataQuery()
@@ -25,6 +28,10 @@ export default function Hero() {
     useEffect(()=>{
         document.body.style.overflow = trailerIsOpen ? 'hidden' : 'unset'
     },[trailerIsOpen])
+
+    const review = () => {
+        navigate(`/movie/${trending[0]?.id}`)
+    }
 
     const style = {
         display: "flex",
@@ -112,11 +119,11 @@ export default function Hero() {
 
         <div className="heroInfo">
             <div className="heroDetails">
-                <h1>{trending[0]?.original_title}</h1>
+                <Link to={`movie/${trending[0]?.id}`}><h1>{trending[0]?.original_title}</h1></Link>
                 <p><span>{trending[0]?.vote_average.toFixed(1)}</span> {allGenre.map(item => item.name).join(', ')} - {trending[0]?.release_date.slice(0,4)}</p>
                 <p>{trending[0]?.overview}</p>
                 <div className="btns">
-                    <button id='btnDetails'>
+                    <button id='btnDetails' onClick={review}>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.0001 15C14.6026 15 18.3334 10 18.3334 10C18.3334 10 14.6026 5 10.0001 5C5.39758 5 1.66675 10 1.66675 10C1.66675 10 5.39758 15 10.0001 15Z" stroke="#222222" strokeWidth="2" strokeLinejoin="round"/>
                             <path d="M10.0001 12.0833C10.5526 12.0833 11.0825 11.8638 11.4732 11.4731C11.8639 11.0824 12.0834 10.5525 12.0834 9.99996C12.0834 9.44742 11.8639 8.91752 11.4732 8.52682C11.0825 8.13612 10.5526 7.91663 10.0001 7.91663C9.44755 7.91663 8.91764 8.13612 8.52694 8.52682C8.13624 8.91752 7.91675 9.44742 7.91675 9.99996C7.91675 10.5525 8.13624 11.0824 8.52694 11.4731C8.91764 11.8638 9.44755 12.0833 10.0001 12.0833Z" stroke="#222222" strokeWidth="2" strokeLinejoin="round"/>
