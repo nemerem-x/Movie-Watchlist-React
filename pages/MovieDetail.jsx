@@ -14,8 +14,6 @@ export default function MovieDetail() {
     const {data: reviews, isLoading: reviewloading, isError: reviewserror} = reviewsData(params.id)
     const {data: videodata, isLoading: videoloading, isError: videoerror} = videoData(data?.id)
 
-    console.log(data)
-
     const click = (e) => {
         if(e.target.id === "add" || e.target.id === "movieAddToWatchlist") {
             console.log("add")

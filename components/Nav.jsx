@@ -15,7 +15,7 @@ import { searchData } from "../src/reactQueries"
 export default function Nav() {
 
     const [searchQuery, setSearchQuery] = useState(undefined)
-    const {data, isLoading, isError} = searchData(encodeURIComponent(searchQuery))
+    const {data, isLoading, isError} = searchData(searchQuery)
 
     const [loginModal, setLoginModal] = useState(false)
     const [mobileNavModal, setMobileNavModal] = useState(false)
