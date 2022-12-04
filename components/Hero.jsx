@@ -17,10 +17,10 @@ export default function Hero() {
     const {data: genre, isLoading: loading, isError: error} = genreData()
     
     const trending = data ? data.results.slice(0,3) : []
-    const allGenre = genre ? genre.genres.filter(e => trending[0]?.genre_ids.includes(e.id)).slice(0,3) : []
+    const allGenre = genre ? genre.genres.filter(e => trending[1]?.genre_ids.includes(e.id)).slice(0,3) : []
     
     //react query
-    const {data: videodata, isLoading: videoloading, isError: videoerror} = videoData(trending[0]?.id)
+    const {data: videodata, isLoading: videoloading, isError: videoerror} = videoData(trending[1]?.id)
 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1000px)' })
     const [trailerIsOpen, setTrailerIsOpen] = useState(false)
@@ -30,7 +30,7 @@ export default function Hero() {
     },[trailerIsOpen])
 
     const review = () => {
-        navigate(`/movie/${trending[0]?.id}#reviews`)
+        navigate(`/movie/${trending[1]?.id}#reviews`)
     }
 
     const style = {
@@ -48,7 +48,7 @@ export default function Hero() {
         alignItems: "center",
         width: "100%",
         height: isTabletOrMobile ? "72%" : "100%",
-        backgroundImage:`linear-gradient(to ${isTabletOrMobile ? "bottom" : "left"}, transparent, #12130C ${isTabletOrMobile ? "80%" : "70%"}), url(${`https://image.tmdb.org/t/p/original${trending[0]?.poster_path}`})`,
+        backgroundImage:`linear-gradient(to ${isTabletOrMobile ? "bottom" : "left"}, transparent, #12130C ${isTabletOrMobile ? "80%" : "70%"}), url(${`https://image.tmdb.org/t/p/original${trending[1]?.poster_path}`})`,
         backgroundSize: "cover",
         backgroundPosition: isTabletOrMobile ? "center top" : "left top",
         justifyContent: "center",
@@ -119,9 +119,9 @@ export default function Hero() {
 
         <div className="heroInfo">
             <div className="heroDetails">
-                <Link to={`movie/${trending[0]?.id}`}><h1>{trending[0]?.original_title}</h1></Link>
-                <p><span>{trending[0]?.vote_average.toFixed(1)}</span> {allGenre.map(item => item.name).join(', ')} - {trending[0]?.release_date.slice(0,4)}</p>
-                <p>{trending[0]?.overview}</p>
+                <Link to={`movie/${trending[1]?.id}`}><h1>{trending[1]?.original_title}</h1></Link>
+                <p><span>{trending[1]?.vote_average.toFixed(1)}</span> {allGenre.map(item => item.name).join(', ')} - {trending[1]?.release_date.slice(0,4)}</p>
+                <p>{trending[1]?.overview}</p>
                 <div className="btns">
                     <button id='btnDetails' onClick={review}>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

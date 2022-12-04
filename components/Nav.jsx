@@ -9,9 +9,13 @@ import Signup from "./Signup"
 import User from "./User"
 import SearchResult from "./SearchResult"
 import { useMediaQuery } from 'react-responsive'
+import { searchData } from "../src/reactQueries"
 
 
 export default function Nav() {
+
+    const [searchQuery, setSearchQuery] = useState(undefined)
+    const {data, isLoading, isError} = searchData(encodeURIComponent(searchQuery))
 
     const [loginModal, setLoginModal] = useState(false)
     const [mobileNavModal, setMobileNavModal] = useState(false)
@@ -42,11 +46,11 @@ export default function Nav() {
                 <p className="logo"><Link to="/">NMDb</Link></p>
                 {
                     !isMobile &&
-                    <input id="mainInput" type="text" placeholder="Search movies"/>
+                    <input onChange={(e)=>setSearchQuery(e.target.value)} id="mainInput" type="text" placeholder="Search movies"/>
                 }
                 {
                     isMobile && mobileSearch && 
-                    <input id="mobileInput" type="text" placeholder="Search movies"/>
+                    <input onChange={(e)=>setSearchQuery(e.target.value)} id="mobileInput" type="text" placeholder="Search movies"/>
                 }
                 <nav>
                     <ul>
@@ -55,7 +59,7 @@ export default function Nav() {
                     </ul> 
                 </nav>
 
-                {/* <SearchResult/> */}
+                {data && <SearchResult data={data} isLoading={isLoading} isError={isError}/>}
 
             </div>
 

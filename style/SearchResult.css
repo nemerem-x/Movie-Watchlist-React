@@ -18,16 +18,17 @@
 }
 
 .searchmodal p, h2 {
-    color: var(--fontColor);
     margin: 0;
 }
 
 .searchmodal p {
-    font-size: 0.7rem;
-    color: var(--secondaryColor);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--fontColorFaded);
 }
 
 .searchmodal h2 {
+    color: var(--fontColor);
     font-size: 1rem;
 }
 
