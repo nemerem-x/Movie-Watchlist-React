@@ -53,3 +53,11 @@ import { useQuery } from '@tanstack/react-query'
     return data.json()
   }
   export const discoverData = (page) => useQuery(['discover', page], discover)
+
+
+  const reviews = async ({queryKey}) => {
+    const [_, id] = queryKey
+    const data = await fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${key}`)
+    return data.json()
+  }
+  export const reviewsData = (id) => useQuery(['review', id], reviews)

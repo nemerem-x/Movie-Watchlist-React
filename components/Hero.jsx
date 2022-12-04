@@ -30,7 +30,7 @@ export default function Hero() {
     },[trailerIsOpen])
 
     const review = () => {
-        navigate(`/movie/${trending[0]?.id}`)
+        navigate(`/movie/${trending[0]?.id}#reviews`)
     }
 
     const style = {

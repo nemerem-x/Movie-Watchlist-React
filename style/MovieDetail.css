@@ -121,12 +121,18 @@
 
 .reviewBox {
     width: 80%;
-    margin: auto;
+    margin: 5em auto;
 }
 
 .review {
     display: flex;
+    flex-direction: column;
     gap: 2em;
+}
+
+.review p:first-child {
+    color: var(--secondaryColor);
+    font-weight: 600;
 }
 
 

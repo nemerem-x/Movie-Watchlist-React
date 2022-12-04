@@ -2,6 +2,7 @@ import '../style/MovieDetail.css'
 import { useParams } from 'react-router-dom'
 import { movieFullData } from '../src/reactQueries'
 import { videoData } from '../src/reactQueries'
+import { reviewsData } from '../src/reactQueries'
 import Loader from '/loading.svg'
 
 export default function MovieDetail() {
@@ -9,7 +10,7 @@ export default function MovieDetail() {
     const params = useParams()
 
     const {data, isLoading, isError} = movieFullData(params.id)
-
+    const {data: reviews, isLoading: reviewloading, isError: reviewserror} = reviewsData(params.id)
     const {data: videodata, isLoading: videoloading, isError: videoerror} = videoData(data?.id)
 
     const click = (e) => {
@@ -65,7 +66,7 @@ export default function MovieDetail() {
                 <img src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`} alt="poster" />
                 <div className="detailLeft">
                     <div className="allgenres">
-                        {data?.genres.map(item => <p>{item.name}</p>)}
+                        {data?.genres.map(item => <p key={item.id}>{item.name}</p>)}
                     </div>
                     <p>{data?.overview}</p>
                 </div>
@@ -73,34 +74,25 @@ export default function MovieDetail() {
             <div className="otherdetailsright">
                 <div className="detailright">
                     <div className="allgenres">
-                        {data?.genres.map(item => <p>{item.name}</p>)}
+                        {data?.genres.map(item => <p key={item.id}>{item.name}</p>)}
                     </div>
                 </div>
             </div>
         </div>
 
-        <div className="reviewBox">
+        <div className="reviewBox" id='reviews'>
             <h1>Reviews</h1>
             <div className="review">
-                <div className="reviews">
-                    <p>Jogn7689</p>
-                    <p>
-                        Lorem ipsum dolor sit amet, 
-                        consectetur adipiscing elit, sed do 
-                        eiusmod tempor incididunt ut labore et 
-                        dolore magna aliqua
-                    </p>
-                </div>
-
-                <div className="reviews">
-                    <p>Jogn7689</p>
-                    <p>
-                        Lorem ipsum dolor sit amet, 
-                        consectetur adipiscing elit, sed do 
-                        eiusmod tempor incididunt ut labore et 
-                        dolore magna aliqua
-                    </p>
-                </div>
+                {
+                    reviews?.results.slice(0,2).map(comment => {
+                        return (
+                            <div className="reviews">
+                                <p>{comment.author}</p>
+                                <p>{comment.content}</p>
+                            </div>
+                        )
+                    })
+                }
             </div>
         </div>
 
