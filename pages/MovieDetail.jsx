@@ -81,11 +81,11 @@ export default function MovieDetail() {
             <div className="otherdetailsright">
                 <div className="detailright">
                     <p>Budget</p>
-                    <h2>{data?.budget}</h2>
+                    <h2>${data?.budget}</h2>
                 </div>
                 <div className="detailright">
                     <p>Revenue</p>
-                    <h2>{data?.revenue}</h2>
+                    <h2>${data?.revenue}</h2>
                 </div>
                 <div className="detailright">
                     <p>Country</p>

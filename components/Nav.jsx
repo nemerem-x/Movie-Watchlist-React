@@ -14,8 +14,9 @@ import { searchData } from "../src/reactQueries"
 
 export default function Nav() {
 
-    const [searchQuery, setSearchQuery] = useState(undefined)
+    const [searchQuery, setSearchQuery] = useState('')
     const {data, isLoading, isError} = searchData(searchQuery)
+    const [searchResultModal, setSearchResultModal] = useState(false)
 
     const [loginModal, setLoginModal] = useState(false)
     const [mobileNavModal, setMobileNavModal] = useState(false)
@@ -25,6 +26,13 @@ export default function Nav() {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1000px)' })
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
+    useEffect(()=>{
+        if(searchQuery.length) {
+            setSearchResultModal(true)
+        } else {
+            setSearchResultModal(false)
+        }
+    },[data || searchQuery])
 
     useEffect(()=>{
         if(user){
@@ -59,7 +67,7 @@ export default function Nav() {
                     </ul> 
                 </nav>
 
-                {data && <SearchResult data={data} isLoading={isLoading} isError={isError}/>}
+                {searchResultModal && <SearchResult data={data} isLoading={isLoading} isError={isError} setSearchResultModal={setSearchResultModal}/>}
 
             </div>
 

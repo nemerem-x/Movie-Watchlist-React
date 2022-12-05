@@ -38,8 +38,13 @@
 }
 
 .titleboxright p {
+    height: 3em;
+    width: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
-    padding: 1em;
+    padding: .6em;
     border-radius: 50%;
     color: var(--primaryColor);
     font-weight: 600;

@@ -25,15 +25,7 @@ export default function Home() {
     const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption)
 
     const [user, loading] = useAuthState(auth)
-    const [data, setData] = useState([])
-
-    // console.log(data)
-
-    const items = [
-        "Black Adam",
-        "Wakanda Forever",
-        "Brotherhood"
-    ]
+    const [fireStoreData, setFireStoreData] = useState([])
 
     const logOut = () => {
         signOut(auth).then(() => {
@@ -44,7 +36,7 @@ export default function Home() {
     }
 
     const addData = (e) => {
-        const find = data.find(each => each.id === e.target.textContent)
+        const find = fireStoreData.find(each => each.id === e.target.textContent)
 
         if(find === undefined){
             setData([...data, {
@@ -53,46 +45,40 @@ export default function Home() {
                 favorited: false
             }])
         } else {
-            const newData = data.filter(ele => ele.id != e.target.textContent)
-            console.log(newData)
-            setData(newData)
+            const newData = fireStoreData.filter(ele => ele.id != e.target.textContent)
+            setFireStoreData(newData)
         }
-
-        console.log(find)
     }
 
     const removeData = (e) => {
-        const newData = data.filter(ele => ele.id != e.target.textContent)
-        console.log(newData)
-        setData(newData)
+        const newData = fireStoreData.filter(ele => ele.id != e.target.textContent)
+        setFireStoreData(newData)
     }
 
     //Get from firestore
-    useEffect(()=>{
-        if(user){
-            const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
-                setData(doc.data().data ? doc.data().data : [])
-                console.log(doc.data().data)
-            })
-            return () => unsub()
-        }
-    },[user])
+    // useEffect(()=>{
+    //     if(user){
+    //         const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
+    //             setFireStoreData(doc.data().data ? doc.data().data : [])
+    //         })
+    //         return () => unsub()
+    //     }
+    // },[user || fireStoreData])
 
     //Post to firestore
-    useEffect(()=>{
-        const add = async (e) => {
-            try {
-                const docRef = await setDoc(doc(db, "user", user.uid), {
-                    data
-                })
+    // useEffect(()=>{
+    //     const add = async (e) => {
+    //         try {
+    //             const docRef = await setDoc(doc(db, "user", user.uid), {
+    //                 data
+    //             })
     
-            } catch(error) {
-                console.log(error)
-            }
-        }
-        {user && add()}
-    },[data])
-
+    //         } catch(error) {
+    //             console.log(error)
+    //         }
+    //     }
+    //     {user && add()}
+    // },[data])
     
     return (
         <>

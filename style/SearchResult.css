@@ -6,7 +6,7 @@
     height: auto;
     z-index: 3;
     background-color: var(--grey);
-    top: 76px;
+    top: 60px;
     left: 94px;
     border-radius: 10px;
 }
@@ -49,6 +49,7 @@
 
 .searchresults {
     width: 100%;
+    position: relative;
 }
 
 .result {
@@ -75,7 +76,7 @@
 .result img {
     width: 42px;
     height: 65px;
-    background-color: red;
+    background-color: black;
     border-radius: 5px;
 }
 

@@ -15,7 +15,7 @@ export default function Category({children}) {
       }
   
       if(children[2]){
-        return <h1>Something went Wrong</h1>
+        return <p id='errormessage'>Something went Wrong</p>
       }
   
       const movieMap = children[0]?.results.map(movie => {

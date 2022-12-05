@@ -31,9 +31,6 @@ export default function NowPlaying() {
                 </svg>
 
                 {nowplaying}
-                {/* <NowplayingMovie/>
-                <NowplayingMovie/>
-                <NowplayingMovie/> */}
                 
             </div>
         </div>

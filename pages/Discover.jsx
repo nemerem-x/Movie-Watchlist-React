@@ -31,15 +31,16 @@ export default function Discover() {
     <div className='discover'>
       <h1>Discover Movies</h1>
 
-        {isLoading && 
+        {isLoading ? 
           <div className="spinnerbox">
             <img id='spinner' src={Loader} alt="loading" />
+          </div> 
+        : isError ? <p id='errormessage'>Something went wrong</p>
+        :
+          <div className="discovermovies">
+            {discover}
           </div>
         }
-
-      <div className="discovermovies">
-        {discover}
-      </div>
 
       <div className="paginationbox">
         <div className="pagination">

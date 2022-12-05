@@ -1,8 +1,9 @@
 import '../style/SearchResult.css'
 import { useNavigate } from 'react-router-dom'
+import Loader from '/loading.svg'
 
 
-export default function SearchResult({data, isLoading, isError}) {
+export default function SearchResult({data, isLoading, isError, setSearchResultModal}) {
 
     const navigate = useNavigate()
 
@@ -10,11 +11,12 @@ export default function SearchResult({data, isLoading, isError}) {
 
         const seeMovie = () => {
             navigate(`movie/${item.id}`)
+            setSearchResultModal(false)
         }
 
         return (
             <div onClick={seeMovie} className="result" key={item?.id}>
-                <img src="" alt="" />
+                <img src={`https://image.tmdb.org/t/p/w500${item?.poster_path}`} alt="poster" />
                 <div className="resultinfo">
                     <h2>{item?.original_title} </h2>
                     <p>{item?.release_date.slice(0,4)}</p>
@@ -24,37 +26,15 @@ export default function SearchResult({data, isLoading, isError}) {
         )
     })
 
-    if(isLoading) {
-        return <img id='spinner' src={Loader} alt="loading" />
-    }
-
-    if(isError) {
-        return <p id='errormessage'>Somthing went wrong</p>
-    }
-
   return (
     <div className="searchmodal">
 
         <div className="searchresults">
             
-            {result}
-            {/* <div className="result">
-                <img src="" alt="" />
-                <div className="resultinfo">
-                    <h2>Black </h2>
-                    <p>$200m</p>
-                    <p>maybe genre here</p>
-                </div>
-            </div>
+            { isLoading ? <img id='spinner' src={Loader} alt="loading" /> 
+            : isError ? <p id='errormessage'>Something went wrong</p>
+            : result}
 
-            <div className="result">
-                <img src="" alt="" />
-                <div className="resultinfo">
-                    <h2>Black </h2>
-                    <p>$200m</p>
-                    <p>maybe genre here</p>
-                </div>
-            </div> */}
         </div>
 
     </div>
