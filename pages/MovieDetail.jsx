@@ -94,7 +94,7 @@ export default function MovieDetail() {
             </div>
         </div>
 
-        <div className="reviewBox" id='reviews'>
+        <div className="reviewBox">
             <h1>Reviews</h1>
             <div className="review">
                 {

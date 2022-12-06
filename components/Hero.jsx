@@ -6,11 +6,17 @@ import { movieDataQuery } from '../src/reactQueries'
 import { genreData } from '../src/reactQueries'
 import { videoData } from '../src/reactQueries'
 import { Link, useNavigate } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
+import fireState from "../src/recoil"
 
 
 export default function Hero() {
 
     const navigate = useNavigate()
+
+    //recoil-state
+    const fireStoreData = useRecoilValue(fireState)
+    console.log(fireStoreData)
     
     //react-query
     const {data, isLoading, isError} = movieDataQuery()
@@ -30,7 +36,7 @@ export default function Hero() {
     },[trailerIsOpen])
 
     const review = () => {
-        navigate(`/movie/${trending[1]?.id}#reviews`)
+        navigate(`/movie/${trending[1]?.id}`)
     }
 
     const style = {

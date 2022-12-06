@@ -13,6 +13,7 @@ import {auth} from "../src/firebase"
 import { Navigate } from "react-router-dom"
 import { useLocation } from "react-router-dom";
 import Nav from '../components/Nav'
+import { RecoilRoot } from 'recoil'
 
 function App() {
 
@@ -39,6 +40,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
     
+      <RecoilRoot>
+
+
         <Nav/>
 
         <div className="pageContainer">
@@ -54,20 +58,22 @@ function App() {
 
             <Route exact path='/watchlist' 
               element={!user ? <Navigate to="/login" replace /> : <Watchlist/> } 
-            />
+              />
 
             <Route exact path='/login'
               element={!user ? <LoginPage/> : <Navigate to="/watchlist" replace /> } 
-            />
+              />
 
             <Route exact path='*' 
               element={<Navigate to="/" replace /> } 
-            />
+              />
 
           </Routes>
         </div>
 
         <Footer/>
+              
+      </RecoilRoot>
 
     </QueryClientProvider>
   )
