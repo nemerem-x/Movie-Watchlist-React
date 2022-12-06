@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import { useAuthState } from "react-firebase-hooks/auth"
-import {auth, db, signOut} from "../src/firebase"
-import { doc, setDoc, onSnapshot  } from "firebase/firestore"
+// import { useAuthState } from "react-firebase-hooks/auth"
+// import {auth, db, signOut} from "../src/firebase"
+// import { doc, setDoc, onSnapshot  } from "firebase/firestore"
 import Hero from "../components/Hero"
 import Trending from "../components/Trending"
 import Watchlist from "../components/Watchlist"
@@ -9,6 +9,7 @@ import Category from "../components/Category"
 import NowPlaying from "../components/NowPlaying"
 import { movieDataQuery } from '../src/reactQueries'
 import { moviesSelected } from "../src/reactQueries"
+import { firestore } from "../src/firestore"
 
 export default function Home() {
 
@@ -21,39 +22,42 @@ export default function Home() {
         refetch()
     }
 
+    const {data} = firestore()
+    console.log(data)
+
     const {data: trending, isLoading, isError} = movieDataQuery()
     const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption)
 
-    const [user, loading] = useAuthState(auth)
-    const [fireStoreData, setFireStoreData] = useState([])
+    // const [user, loading] = useAuthState(auth)
+    // const [fireStoreData, setFireStoreData] = useState([])
 
-    const logOut = () => {
-        signOut(auth).then(() => {
+    // const logOut = () => {
+    //     signOut(auth).then(() => {
             
-          }).catch((error) => {
-            console.log(error)
-        })
-    }
+    //       }).catch((error) => {
+    //         console.log(error)
+    //     })
+    // }
 
-    const addData = (e) => {
-        const find = fireStoreData.find(each => each.id === e.target.textContent)
+    // const addData = (e) => {
+    //     const find = fireStoreData.find(each => each.id === e.target.textContent)
 
-        if(find === undefined){
-            setData([...data, {
-                id: e.target.textContent,
-                watchlisted: true,
-                favorited: false
-            }])
-        } else {
-            const newData = fireStoreData.filter(ele => ele.id != e.target.textContent)
-            setFireStoreData(newData)
-        }
-    }
+    //     if(find === undefined){
+    //         setData([...data, {
+    //             id: e.target.textContent,
+    //             watchlisted: true,
+    //             favorited: false
+    //         }])
+    //     } else {
+    //         const newData = fireStoreData.filter(ele => ele.id != e.target.textContent)
+    //         setFireStoreData(newData)
+    //     }
+    // }
 
-    const removeData = (e) => {
-        const newData = fireStoreData.filter(ele => ele.id != e.target.textContent)
-        setFireStoreData(newData)
-    }
+    // const removeData = (e) => {
+    //     const newData = fireStoreData.filter(ele => ele.id != e.target.textContent)
+    //     setFireStoreData(newData)
+    // }
 
     //Get from firestore
     // useEffect(()=>{
