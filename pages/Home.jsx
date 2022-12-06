@@ -9,7 +9,6 @@ import Category from "../components/Category"
 import NowPlaying from "../components/NowPlaying"
 import { movieDataQuery } from '../src/reactQueries'
 import { moviesSelected } from "../src/reactQueries"
-import { firestore } from "../src/firestore"
 
 export default function Home() {
 
@@ -21,9 +20,6 @@ export default function Home() {
         setExpand(false)
         refetch()
     }
-
-    const {data} = firestore()
-    console.log(data)
 
     const {data: trending, isLoading, isError} = movieDataQuery()
     const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption)

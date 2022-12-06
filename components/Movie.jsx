@@ -8,6 +8,7 @@ import { doc, setDoc, onSnapshot  } from "firebase/firestore"
 import {auth, db, signOut} from "../src/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { Link } from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive'
 
 export default function Movie({movie}) {
 
@@ -17,7 +18,7 @@ export default function Movie({movie}) {
   const allGenre = data?.genres.filter(e => movie.genre_ids.includes(e.id)).slice(0,3)
   const navigate = useNavigate()
   const [mouseIn, setMouseIn] = useState(false)
-
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   //Get from firestore
   useEffect(()=>{
@@ -44,13 +45,13 @@ export default function Movie({movie}) {
         const find = fireStoreData.find(each => each.id === movie.id)
     
         if(find === undefined){
-            const data = [...fireStoreData, {
-              id: movie.id,
-              watchlisted: true,
-              favorited: false
-            }]
-            mutate(data)
-          } 
+          const data = [...fireStoreData, {
+            id: movie.id,
+            watchlisted: true,
+            favorited: false
+          }]
+          mutate(data)
+        } 
 
       } else {
         navigate(`/movie/${movie.id}`)
@@ -62,9 +63,9 @@ export default function Movie({movie}) {
   }
 
   const removeFromFirestore = (e) => {
-    if(e.target.id === "movieWatchlisted") {
+    if(e.target.id === "movieWatchlisted" || e.target.id === "remove") {
       const newData = fireStoreData.filter(each => each.id != movie.id)
-      console.log(newData)
+      console.log(e.target.id)
       mutate(newData)
     } else {
       navigate(`/movie/${movie.id}`)
@@ -76,16 +77,28 @@ export default function Movie({movie}) {
   return (
         <div className="movie" onMouseEnter={()=>setMouseIn(true)} onMouseLeave={()=>setMouseIn(false)}>
           {
-            mouseIn &&
-            <div onClick={(e)=>addToFirestore(e)} className="overlay">
-              <svg onClick={(e)=>addToFirestore(e)} id='add' width="29" height="29" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.2257 1.25269H21.9715C26.9421 1.25269 30.9715 5.28212 30.9715 10.2527V22C30.9715 26.9706 26.9421 31 21.9715 31H10.2257C5.25515 31 1.22571 26.9706 1.22571 22V10.2527C1.22571 5.28212 5.25515 1.25269 10.2257 1.25269Z" stroke="white" strokeWidth="2"/>
-                <path d="M16.442 15.4323V10.2709H15.1447V15.4323H10.6041V16.907H15.1447V22.0685H16.442V16.907H20.9826V15.4323H16.442Z" fill="white"/>
-              </svg>
-              <div className="rating">
-                <h3>{movie.vote_average.toFixed(1)}</h3>
+            //hover disappears on mobile
+            // !isMobile &&
+            
+              mouseIn &&
+              <div onClick={(e)=>addToFirestore(e)} className="overlay">
+                {
+                  watchlisted ?
+                  <svg onClick={(e)=>removeFromFirestore(e)} id='remove' width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="31.75" height="31.75" rx="10" fill="#CCFF00"/>
+                    <path d="M19.8351 11.167C19.9069 11.084 19.9927 11.018 20.0874 10.973C20.182 10.928 20.2837 10.9048 20.3864 10.9048C20.4891 10.9048 20.5907 10.928 20.6854 10.973C20.78 11.018 20.8658 11.084 20.9377 11.167C21.2389 11.5114 21.2431 12.0679 20.9482 12.4183L14.7209 20.7487C14.6502 20.8365 14.5644 20.9071 14.4688 20.9562C14.3731 21.0052 14.2697 21.0317 14.1647 21.0339C14.0597 21.0361 13.9554 21.0141 13.8582 20.9691C13.761 20.9242 13.6729 20.8573 13.5993 20.7725L9.81008 16.4274C9.66394 16.2587 9.58208 16.0319 9.58208 15.7957C9.58208 15.5595 9.66394 15.3327 9.81008 15.1641C9.88195 15.0811 9.96773 15.0152 10.0624 14.9702C10.1571 14.9252 10.2587 14.902 10.3614 14.902C10.4641 14.902 10.5657 14.9252 10.6604 14.9702C10.7551 15.0152 10.8409 15.0811 10.9127 15.1641L14.127 18.8502L19.814 11.1932C19.8205 11.184 19.8276 11.1752 19.8351 11.167Z" fill="#222222"/>
+                  </svg>
+                  :
+                  <svg onClick={(e)=>addToFirestore(e)} id='add' width="29" height="29" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.2257 1.25269H21.9715C26.9421 1.25269 30.9715 5.28212 30.9715 10.2527V22C30.9715 26.9706 26.9421 31 21.9715 31H10.2257C5.25515 31 1.22571 26.9706 1.22571 22V10.2527C1.22571 5.28212 5.25515 1.25269 10.2257 1.25269Z" stroke="white" strokeWidth="2"/>
+                    <path d="M16.442 15.4323V10.2709H15.1447V15.4323H10.6041V16.907H15.1447V22.0685H16.442V16.907H20.9826V15.4323H16.442Z" fill="white"/>
+                  </svg>
+                }
+                <div className="rating">
+                  <h3>{movie.vote_average.toFixed(1)}</h3>
+                </div>
               </div>
-            </div>
+            
           }
           <img onClick={addToFirestore} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="poster" />
           <p>{allGenre?.map(item => item.name).join(", ")}</p>
