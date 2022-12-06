@@ -8,19 +8,23 @@ import { videoData } from '../src/reactQueries'
 import { Link, useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import fireState from "../src/recoil"
+import { doc, setDoc  } from "firebase/firestore"
+import {auth, db} from "../src/firebase"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { useMutation } from "@tanstack/react-query"
 
 
 export default function Hero() {
 
     const navigate = useNavigate()
+    const [user, loading] = useAuthState(auth)
 
     //recoil-state
     const fireStoreData = useRecoilValue(fireState)
-    console.log(fireStoreData)
     
     //react-query
     const {data, isLoading, isError} = movieDataQuery()
-    const {data: genre, isLoading: loading, isError: error} = genreData()
+    const {data: genre, isLoading: genreloading, isError: error} = genreData()
     
     const trending = data ? data.results.slice(0,3) : []
     const allGenre = genre ? genre.genres.filter(e => trending[1]?.genre_ids.includes(e.id)).slice(0,3) : []
@@ -34,6 +38,40 @@ export default function Hero() {
     useEffect(()=>{
         document.body.style.overflow = trailerIsOpen ? 'hidden' : 'unset'
     },[trailerIsOpen])
+
+
+    //add to firestore and/or watchlist
+    const add = (data) => {
+    return setDoc(doc(db, "user", user.uid), { data })
+    }
+    const { mutate } = useMutation(add)
+    const addToFirestore = (e) => {
+    if(user){
+
+            const find = fireStoreData.find(each => each.id === trending[1]?.id)
+
+            if(find === undefined){
+                const data = [...fireStoreData, {
+                id: trending[1]?.id,
+                watchlisted: true,
+                favorited: false
+                }]
+                mutate(data)
+            }
+
+    } else {
+        navigate(`/login`)
+        }
+    }
+
+    //remove from firestore
+    const removeFromFirestore = (e) => {
+        const newData = fireStoreData.filter(each => each.id != trending[1]?.id)
+        mutate(newData)
+    }
+
+    //right button if or not in firestore
+    const watchlisted = fireStoreData.some(each => each.id === trending[1]?.id)
 
     const review = () => {
         navigate(`/movie/${trending[1]?.id}`)
@@ -137,12 +175,24 @@ export default function Hero() {
                         Reviews
                     </button>
 
-                    <button id='btnAddToWatchlist'>
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6.75 5.25V0H5.25V5.25H0V6.75H5.25V12H6.75V6.75H12V5.25H6.75Z" fill="white"/>
-                        </svg>
-                        Watchlist
-                    </button>
+                    {
+                        watchlisted  && user ?
+                        <button onClick={(e)=>removeFromFirestore(e)} id='movieWatchlisted' className="movieWatchlisted">
+                            <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.11137 8.54706L2.10172 5.09558C2.10163 5.09547 2.10153 5.09536 2.10143 5.09525C2.00808 4.98755 1.89498 4.90003 1.76776 4.83955C1.64028 4.77894 1.50203 4.74714 1.36142 4.74714C1.22081 4.74714 1.08256 4.77894 0.955075 4.83955C0.82774 4.90008 0.714555 4.9877 0.621156 5.09553C0.433201 5.31244 0.332092 5.59836 0.332092 5.89088C0.332092 6.1834 0.433201 6.46932 0.621155 6.68623L0.621674 6.68682L4.41051 11.0315C4.41059 11.0316 4.41066 11.0317 4.41074 11.0317C4.50631 11.1418 4.62251 11.2308 4.75327 11.2912C4.88429 11.3518 5.02621 11.382 5.16999 11.379C5.31376 11.3759 5.45434 11.3397 5.58287 11.2738C5.71126 11.2079 5.82413 11.1144 5.91572 11.0005L5.91584 11.0006L5.92119 10.9935L12.1444 2.66854C12.5133 2.22413 12.507 1.53382 12.1263 1.09798C12.033 0.990342 11.9199 0.902866 11.7927 0.842405L11.6854 1.06819L11.7927 0.842405C11.6653 0.781797 11.527 0.75 11.3864 0.75C11.2458 0.75 11.1075 0.781797 10.9801 0.842405C10.8535 0.902589 10.7408 0.989542 10.6478 1.09651C10.635 1.11073 10.6231 1.12561 10.612 1.14103L5.11137 8.54706Z" fill="#222222" stroke="black" strokeWidth="0.5"/>
+                            </svg>
+                                Watchlisted
+                        </button>
+                        :
+                        <button onClick={addToFirestore} id='btnAddToWatchlist'>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.75 5.25V0H5.25V5.25H0V6.75H5.25V12H6.75V6.75H12V5.25H6.75Z" fill="white"/>
+                            </svg>
+                            Watchlist
+                        </button>
+                    }
+
+
                 </div>
             </div>
         </div>

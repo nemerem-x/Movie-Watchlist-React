@@ -386,6 +386,12 @@ button:disabled {
   gap: .3em;
 }
 
+.movieWatchlisted {
+  display: flex;
+  gap: .5em;
+  align-items: center;
+}
+
 .hamburger {
   display: none;
   cursor: pointer;

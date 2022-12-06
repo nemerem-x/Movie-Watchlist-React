@@ -1,8 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import { useAuthState } from "react-firebase-hooks/auth"
-import {auth, db, signOut} from "../src/firebase"
-import { doc, setDoc, onSnapshot  } from "firebase/firestore"
-import { useState } from 'react'
 
   const key = import.meta.env.VITE_APP_TMDB_KEY
 

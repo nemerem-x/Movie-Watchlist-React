@@ -42,7 +42,6 @@ function App() {
     
       <RecoilRoot>
 
-
         <Nav/>
 
         <div className="pageContainer">
