@@ -7,15 +7,52 @@ import MovieDetail from '../pages/MovieDetail'
 import Footer from '../components/Footer'
 import { useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
-import { useAuthState } from "react-firebase-hooks/auth"
+// import { useAuthState } from "react-firebase-hooks/auth"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import {auth} from "../src/firebase"
+// import {auth} from "../src/firebase"
 import { Navigate } from "react-router-dom"
 import { useLocation } from "react-router-dom";
 import Nav from '../components/Nav'
-import { RecoilRoot } from 'recoil'
+import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
+import {fireState, fireStatePost} from "../src/recoil"
+import { useAuthState } from "react-firebase-hooks/auth"
+import {auth, db} from "../src/firebase"
+import { doc, setDoc, onSnapshot  } from "firebase/firestore"
 
 function App() {
+
+  const [user, loading] = useAuthState(auth)
+
+  //recoil global state
+  const [_, setFireStoreData] = useRecoilState(fireState)
+  const fireStoreNewPost = useRecoilValue(fireStatePost)
+
+  // Get from firestore
+  useEffect(()=>{
+    if(user){
+        const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
+            setFireStoreData(doc.data() ? doc.data().fireStoreNewPost : [])
+        })
+        return () => unsub()
+    }
+  },[user, fireStoreNewPost])
+
+  // Post to firestore
+  useEffect(()=>{
+    const add = async () => {
+        try {
+            const docRef = await setDoc(doc(db, "user", user.uid), {
+                fireStoreNewPost
+            })
+            
+        } catch(error) {
+            console.log(error)
+        }
+    }
+      add()
+  },[fireStoreNewPost])
+
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -35,13 +72,9 @@ function App() {
     return null;
   }
 
-  const [user, loading] = useAuthState(auth)
-
   return (
     <QueryClientProvider client={queryClient}>
     
-      <RecoilRoot>
-
         <Nav/>
 
         <div className="pageContainer">
@@ -72,8 +105,6 @@ function App() {
 
         <Footer/>
               
-      </RecoilRoot>
-
     </QueryClientProvider>
   )
 }

@@ -1,5 +1,6 @@
 import '../style/MovieDetail.css'
 import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 import { movieFullData } from '../src/reactQueries'
 import { videoData } from '../src/reactQueries'
 import { reviewsData } from '../src/reactQueries'
@@ -23,7 +24,6 @@ export default function MovieDetail() {
     //src/recoil-Global State
     const fireStoreData = useRecoilValue(fireState)
     const [_, fireStorePost] = useRecoilState(fireStatePost)
-    console.log(fireStoreData)
 
     const addToFirestore = () => {
         if(user){
@@ -31,21 +31,16 @@ export default function MovieDetail() {
             const find = fireStoreData.find(each => each.id === movieData.id)
             console.log(find)
             if(find === undefined){
-                fireStorePost((olddata) => [
-                    ...olddata, {
-                        id: movieData.id,
-                        watchlisted: true,
-                        favorited: false
-                    }
-                ])
-                // const data = [...fireStoreData, {
-                // id: movieData.id,
-                // watchlisted: true,
-                // favorited: false
-                // }]
-                // fireStorePost(data)
+                const data = [...fireStoreData, {
+                id: movieData.id,
+                watchlisted: true,
+                favorited: false
+                }]
+                fireStorePost(data)
             } 
-        }
+        } else {
+            navigate(`/login`)
+          }
     }
 
   //remove from firestore
