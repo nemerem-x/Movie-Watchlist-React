@@ -5,5 +5,10 @@ const fireState = atom({
     default: [], // default value (aka initial value)
 });
 
-export default fireState
+const fireStatePost = atom({
+    key: 'firePostBool', // unique ID (with respect to other atoms/selectors)
+    default: [], // default value (aka initial value)
+});
+
+export {fireState, fireStatePost}
 

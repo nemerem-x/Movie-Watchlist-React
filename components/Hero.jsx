@@ -6,8 +6,8 @@ import { movieDataQuery } from '../src/reactQueries'
 import { genreData } from '../src/reactQueries'
 import { videoData } from '../src/reactQueries'
 import { Link, useNavigate } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
-import fireState from "../src/recoil"
+import { useRecoilValue, useRecoilState } from 'recoil'
+import {fireState, fireStatePost} from "../src/recoil"
 import { doc, setDoc  } from "firebase/firestore"
 import {auth, db} from "../src/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
@@ -21,7 +21,8 @@ export default function Hero() {
 
     //recoil-state
     const fireStoreData = useRecoilValue(fireState)
-    
+    const [_, fireStorePost] = useRecoilState(fireStatePost)
+
     //react-query
     const {data, isLoading, isError} = movieDataQuery()
     const {data: genre, isLoading: genreloading, isError: error} = genreData()
@@ -41,10 +42,10 @@ export default function Hero() {
 
 
     //add to firestore and/or watchlist
-    const add = (data) => {
-    return setDoc(doc(db, "user", user.uid), { data })
-    }
-    const { mutate } = useMutation(add)
+    // const add = (data) => {
+    // return setDoc(doc(db, "user", user.uid), { data })
+    // }
+    // const { mutate } = useMutation(add)
     const addToFirestore = (e) => {
     if(user){
 
@@ -56,7 +57,7 @@ export default function Hero() {
                 watchlisted: true,
                 favorited: false
                 }]
-                mutate(data)
+                fireStorePost(data)
             }
 
     } else {
@@ -67,7 +68,7 @@ export default function Hero() {
     //remove from firestore
     const removeFromFirestore = (e) => {
         const newData = fireStoreData.filter(each => each.id != trending[1]?.id)
-        mutate(newData)
+        fireStorePost(newData)
     }
 
     //right button if or not in firestore

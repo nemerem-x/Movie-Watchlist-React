@@ -11,39 +11,45 @@ import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { useRecoilState } from 'recoil'
 import { useRecoilValue } from 'recoil'
-import fireState from "../src/recoil"
+import {fireState, fireStatePost} from "../src/recoil"
 
 export default function Movie({movie}) {
 
   const [user, loading] = useAuthState(auth)
   // const [fireStoreData, setFireStoreData] = useState([])
-  const {data, isLoading, isError} = genreData()
-  const allGenre = data?.genres.filter(e => movie.genre_ids.includes(e.id)).slice(0,3)
+  const [data, setData] = useState([])
+  const {data:genre, isLoading, isError} = genreData()
+  const allGenre = genre?.genres.filter(e => movie.genre_ids.includes(e.id)).slice(0,3)
   const navigate = useNavigate()
   const [mouseIn, setMouseIn] = useState(false)
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   //src/recoil-Global State
   const fireStoreData = useRecoilValue(fireState)
-  const [_, setFireStoreData] = useRecoilState(fireState)
-  
+  // const [_, setFireStoreData] = useRecoilState(fireState)
+  // const fireStoreNewPost = useRecoilValue(fireStatePost)
+  const [_, fireStorePost] = useRecoilState(fireStatePost)
+
+  // console.log(fireStoreData)
 
   //Get from firestore
-  useEffect(()=>{
-    if(user){
-        const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
-            setFireStoreData(doc.data().data ? doc.data().data : [])
-        })
-        return () => unsub()
-    }
-  },[user])
+  // useEffect(()=>{
+  //   if(user){
+  //       const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
+  //           setFireStoreData(doc.data().data ? doc.data().data : [])
+  //           setData(doc.data().data ? doc.data().data : [])
+
+  //       })
+  //       return () => unsub()
+  //   }
+  // },[user])
 
 
   //add to firestore and/or watchlist
-  const add = (data) => {
-    return setDoc(doc(db, "user", user.uid), { data })
-  }
-  const { mutate } = useMutation(add)
+  // const add = (data) => {
+  //   return setDoc(doc(db, "user", user.uid), { data })
+  // }
+  // const { mutate } = useMutation(add)
   const addToFirestore = (e) => {
     if(user){
 
@@ -57,19 +63,19 @@ export default function Movie({movie}) {
             watchlisted: true,
             favorited: false
           }]
-          mutate(data)
+          fireStorePost(data)
         } 
 
       } else if(e.target.id === "overlay") {
         navigate(`/movie/${movie.id}`)
-      }
+        }
 
     } else {
       navigate(`/login`)
     }
   }
 
-  //   Post to firestore
+  // Post to firestore
   // useEffect(()=>{
   //     const add = async (e) => {
   //         try {
@@ -88,7 +94,7 @@ export default function Movie({movie}) {
   const removeFromFirestore = (e) => {
     if(e.target.id === "movieWatchlisted" || e.currentTarget.id === "remove") {
       const newData = fireStoreData.filter(each => each.id != movie.id)
-      mutate(newData)
+      fireStorePost(newData)
     } else {
       navigate(`/movie/${movie.id}`)
     }

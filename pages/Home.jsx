@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-// import { useAuthState } from "react-firebase-hooks/auth"
-// import {auth, db, signOut} from "../src/firebase"
-// import { doc, setDoc, onSnapshot  } from "firebase/firestore"
+import { useAuthState } from "react-firebase-hooks/auth"
+import {auth, db, signOut} from "../src/firebase"
+import { doc, setDoc, onSnapshot  } from "firebase/firestore"
 import Hero from "../components/Hero"
 import Trending from "../components/Trending"
 import Watchlist from "../components/Watchlist"
@@ -9,8 +9,15 @@ import Category from "../components/Category"
 import NowPlaying from "../components/NowPlaying"
 import { movieDataQuery } from '../src/reactQueries'
 import { moviesSelected } from "../src/reactQueries"
+import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
+import {fireState, fireStatePost} from "../src/recoil"
+
 
 export default function Home() {
+
+    const [user, loading] = useAuthState(auth)
+
 
     const [expand, setExpand] = useState(false)
     const [selectedOption, setSelectedOption] = useState("upcoming")
@@ -24,7 +31,9 @@ export default function Home() {
     const {data: trending, isLoading, isError} = movieDataQuery()
     const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption)
 
-    // const [user, loading] = useAuthState(auth)
+      const [_, setFireStoreData] = useRecoilState(fireState)
+      const fireStoreNewPost = useRecoilValue(fireStatePost)
+
     // const [fireStoreData, setFireStoreData] = useState([])
 
     // const logOut = () => {
@@ -55,30 +64,30 @@ export default function Home() {
     //     setFireStoreData(newData)
     // }
 
-    //Get from firestore
-    // useEffect(()=>{
-    //     if(user){
-    //         const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
-    //             setFireStoreData(doc.data().data ? doc.data().data : [])
-    //         })
-    //         return () => unsub()
-    //     }
-    // },[user || fireStoreData])
+    // Get from firestore
+    useEffect(()=>{
+        if(user){
+            const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
+                setFireStoreData(doc.data() ? doc.data().fireStoreNewPost : [])
+        })
+        return () => unsub()
+        }
+    },[user])
 
-    //Post to firestore
-    // useEffect(()=>{
-    //     const add = async (e) => {
-    //         try {
-    //             const docRef = await setDoc(doc(db, "user", user.uid), {
-    //                 data
-    //             })
+    // Post to firestore
+    useEffect(()=>{
+        const add = async (e) => {
+            try {
+                const docRef = await setDoc(doc(db, "user", user.uid), {
+                    fireStoreNewPost
+                })
     
-    //         } catch(error) {
-    //             console.log(error)
-    //         }
-    //     }
-    //     {user && add()}
-    // },[data])
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        {user && add()}
+    },[fireStoreNewPost])
     
     return (
         <>
