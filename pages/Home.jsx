@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
-import {auth, db, signOut} from "../src/firebase"
+import {auth, db} from "../src/firebase"
 import { doc, setDoc, onSnapshot  } from "firebase/firestore"
 import Hero from "../components/Hero"
 import Trending from "../components/Trending"
@@ -23,7 +23,6 @@ export default function Home() {
     const [expand, setExpand] = useState(false)
 
     //recoil state
-    const fireStoreData = useRecoilValue(fireState)
     const [_, setFireStoreData] = useRecoilState(fireState)
     const fireStoreNewPost = useRecoilValue(fireStatePost)
     const selectOption = (e) => {
@@ -37,11 +36,10 @@ export default function Home() {
         if(user){
             const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
                 setFireStoreData(doc.data() ? doc.data().fireStoreNewPost : [])
-                console.log(doc.data())
             })
             return () => unsub()
         }
-    },[user])
+    },[user, fireStoreNewPost])
 
     // Post to firestore
     useEffect(()=>{
@@ -55,7 +53,7 @@ export default function Home() {
                 console.log(error)
             }
         }
-        if(fireStoreNewPost.length){
+        if(fireStoreNewPost){
             add()
         }
     },[fireStoreNewPost])

@@ -1,11 +1,9 @@
 import React from 'react'
 import '../style/Movie.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { genreData } from '../src/reactQueries'
-import { useMutation } from "@tanstack/react-query"
-import { doc, setDoc, onSnapshot  } from "firebase/firestore"
-import {auth, db, signOut} from "../src/firebase"
+import {auth} from "../src/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
@@ -16,7 +14,6 @@ import {fireState, fireStatePost} from "../src/recoil"
 export default function Movie({movie}) {
 
   const [user, loading] = useAuthState(auth)
-  const [data, setData] = useState([])
   const {data:genre, isLoading, isError} = genreData()
   const allGenre = genre?.genres.filter(e => movie.genre_ids.includes(e.id)).slice(0,3)
   const navigate = useNavigate()
@@ -34,7 +31,7 @@ export default function Movie({movie}) {
       if(e.target.id === "add" || e.target.id === "movieAddToWatchlist") {
 
         const find = fireStoreData.find(each => each.id === movie.id)
-    
+
         if(find === undefined){
           const data = [...fireStoreData, {
             id: movie.id,

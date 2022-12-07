@@ -10,12 +10,15 @@ import User from "./User"
 import SearchResult from "./SearchResult"
 import { useMediaQuery } from 'react-responsive'
 import { searchData } from "../src/reactQueries"
+import { fireState } from "../src/recoil"
+import { useRecoilValue } from "recoil"
 
 
 export default function Nav() {
 
+    const fireStoreData = useRecoilValue(fireState)
     const [searchQuery, setSearchQuery] = useState('')
-    const {data, isLoading, isError} = searchData(searchQuery)
+    const {data, isLoading, isError} = searchData(searchQuery) //react query
     const [searchResultModal, setSearchResultModal] = useState(false)
 
     const [loginModal, setLoginModal] = useState(false)
@@ -75,7 +78,12 @@ export default function Nav() {
             <div className="right">
                 <Link to="/watchlist">
                     <div className="watchlist">
-                        <img src={addToWatchlist} alt="icon" /><div className="watchlistCount"></div> <p>Watchlist</p>
+                        <img src={addToWatchlist} alt="icon" />
+                        {
+                            fireStoreData.length > 0 &&
+                            <div className="watchlistCount"></div>
+                        }
+                        <p>Watchlist</p>
                     </div>
                 </Link>
 
