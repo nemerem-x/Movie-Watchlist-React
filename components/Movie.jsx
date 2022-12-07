@@ -16,7 +16,6 @@ import {fireState, fireStatePost} from "../src/recoil"
 export default function Movie({movie}) {
 
   const [user, loading] = useAuthState(auth)
-  // const [fireStoreData, setFireStoreData] = useState([])
   const [data, setData] = useState([])
   const {data:genre, isLoading, isError} = genreData()
   const allGenre = genre?.genres.filter(e => movie.genre_ids.includes(e.id)).slice(0,3)
@@ -26,30 +25,9 @@ export default function Movie({movie}) {
 
   //src/recoil-Global State
   const fireStoreData = useRecoilValue(fireState)
-  // const [_, setFireStoreData] = useRecoilState(fireState)
-  // const fireStoreNewPost = useRecoilValue(fireStatePost)
   const [_, fireStorePost] = useRecoilState(fireStatePost)
 
-  // console.log(fireStoreData)
 
-  //Get from firestore
-  // useEffect(()=>{
-  //   if(user){
-  //       const unsub = onSnapshot(doc(db, "user", user.uid), (doc) => {
-  //           setFireStoreData(doc.data().data ? doc.data().data : [])
-  //           setData(doc.data().data ? doc.data().data : [])
-
-  //       })
-  //       return () => unsub()
-  //   }
-  // },[user])
-
-
-  //add to firestore and/or watchlist
-  // const add = (data) => {
-  //   return setDoc(doc(db, "user", user.uid), { data })
-  // }
-  // const { mutate } = useMutation(add)
   const addToFirestore = (e) => {
     if(user){
 
@@ -75,21 +53,6 @@ export default function Movie({movie}) {
     }
   }
 
-  // Post to firestore
-  // useEffect(()=>{
-  //     const add = async (e) => {
-  //         try {
-  //             const docRef = await setDoc(doc(db, "user", user.uid), {
-  //                 data
-  //             })
-  
-  //         } catch(error) {
-  //             console.log(error)
-  //         }
-  //     }
-  //     {user && add()}
-  // },[data])
-
   //remove from firestore
   const removeFromFirestore = (e) => {
     if(e.target.id === "movieWatchlisted" || e.currentTarget.id === "remove") {
@@ -99,12 +62,12 @@ export default function Movie({movie}) {
       navigate(`/movie/${movie.id}`)
     }
   }
-
+  
   //see movie details
   const seeMovie = () => {
     navigate(`/movie/${movie.id}`)
   }
-
+  
   const watchlisted = fireStoreData.some(each => each.id === movie.id)
 
   return (

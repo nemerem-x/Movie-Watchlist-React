@@ -72,7 +72,7 @@ export default function Hero() {
     }
 
     //right button if or not in firestore
-    const watchlisted = fireStoreData.some(each => each.id === trending[1]?.id)
+    const watchlisted = fireStoreData?.some(each => each.id === trending[1]?.id)
 
     const review = () => {
         navigate(`/movie/${trending[1]?.id}`)
