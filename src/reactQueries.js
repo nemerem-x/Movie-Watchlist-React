@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { useQueries } from '@tanstack/react-query'
 
   const key = import.meta.env.VITE_APP_TMDB_KEY
 
@@ -45,6 +46,25 @@ import { useQuery } from '@tanstack/react-query'
     return movieFullData.json()
   }
   export const movieFullData = (id) => useQuery(['movie', id], movie)
+
+  // const ids = [
+  //   {favorited: false,
+  //   id: '774752',
+  //   watchlisted: true},
+  //   {favorited: false,
+  //   id: '436270',
+  //   watchlisted: true }
+  // ]
+  const movieWatchlist = async ({queryKey}) => {
+    const [_, id] = queryKey
+      const movieFullData = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${key}`)
+      return movieFullData.json()
+  }
+  export const movieWatchlistData = (ids) => useQueries({
+    queries: ids.map(id => {
+      return {queryKey: ['moviedata', id], queryFn: movieWatchlist}
+    })
+  })
 
 
   const discover = async ({queryKey}) => {
