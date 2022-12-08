@@ -80,8 +80,8 @@ export default function Nav() {
                     <div className="watchlist">
                         <img src={addToWatchlist} alt="icon" />
                         {
-                            fireStoreData.length > 0 &&
-                            <div className="watchlistCount"></div>
+                            user && fireStoreData.length > 0 &&
+                            <div className="watchlistCount"></div> //watchlist red indicator
                         }
                         <p>Watchlist</p>
                     </div>

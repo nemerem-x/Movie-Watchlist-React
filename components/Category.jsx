@@ -58,9 +58,9 @@ export default function Category({children}) {
         {
           expand && 
           <div className="options">
-            <p onClick={(e)=>selectOption(e)}>upcoming</p>
-            <p onClick={(e)=>selectOption(e)}>popular</p>
-            <p onClick={(e)=>selectOption(e)}>top_rated</p>
+            <p onClick={(e)=>selectOption(e)}>Upcoming</p>
+            <p onClick={(e)=>selectOption(e)}>Popular</p>
+            <p onClick={(e)=>selectOption(e)}>Top Rated</p>
           </div>
         }
         <div ref={scrollable} className="genresection">

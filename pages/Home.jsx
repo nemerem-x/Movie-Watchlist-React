@@ -11,10 +11,10 @@ import { moviesSelected } from "../src/reactQueries"
 export default function Home() {
 
     const {data: trending, isLoading, isError} = movieDataQuery()
-    const [selectedOption, setSelectedOption] = useState("upcoming")
-    const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption)
+    const [selectedOption, setSelectedOption] = useState("Upcoming")
+    const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption.replace(' ', '_').toLowerCase())
     const [expand, setExpand] = useState(false)
-
+    console.log(selectedOption)
     const selectOption = (e) => {
         setSelectedOption(e.currentTarget.textContent)
         setExpand(false)
