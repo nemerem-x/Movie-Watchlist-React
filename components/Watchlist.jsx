@@ -1,11 +1,18 @@
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "../src/firebase"
 import { Link } from "react-router-dom"
+import { movieFullData } from '../src/reactQueries'
+import { useRecoilValue } from 'recoil'
+import {fireState, fireStatePost} from "../src/recoil"
 import '../style/Watchlist.css'
 
 export default function Watchlist() {
 
     const [user, loading] = useAuthState(auth)
+    const fireStoreData = useRecoilValue(fireState)
+
+    const id = fireStoreData.map(item => item.id)
+    const {data: movieData, isLoading, isError} = movieFullData()
 
   return (
     <div className='yourwatchlist'>
