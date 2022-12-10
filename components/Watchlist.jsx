@@ -15,6 +15,7 @@ export default function Watchlist() {
     const watchlistsArray = movieWatchlistData(ids)
 
     const watchlists = watchlistsArray?.map(watchlist => {
+
         if (watchlist.status === "loading"){
             return <p>loading...</p>
         }

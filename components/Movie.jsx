@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { genreData } from '../src/reactQueries'
 import {auth} from "../src/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
-import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { useRecoilState } from 'recoil'
 import { useRecoilValue } from 'recoil'
@@ -15,7 +14,8 @@ export default function Movie({movie}) {
 
   const [user, loading] = useAuthState(auth)
   const {data:genre, isLoading, isError} = genreData()
-  const allGenre = genre?.genres.filter(e => movie.genre_ids.includes(e.id)).slice(0,3)
+
+  const allGenre = genre?.genres.filter(e => movie?.genre_ids?.includes(e.id)).slice(0,3)
   const navigate = useNavigate()
   const [mouseIn, setMouseIn] = useState(false)
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
@@ -23,7 +23,6 @@ export default function Movie({movie}) {
   //src/recoil-Global State
   const fireStoreData = useRecoilValue(fireState)
   const [_, fireStorePost] = useRecoilState(fireStatePost)
-
 
   const addToFirestore = (e) => {
     
@@ -63,11 +62,6 @@ export default function Movie({movie}) {
     }
   }
   
-  // //see movie details
-  // const seeMovie = () => {
-  //   navigate(`/movie/${movie.id}`)
-  // }
-  
   const watchlisted = fireStoreData.some(each => each.id === movie.id)
 
   return (
@@ -94,8 +88,8 @@ export default function Movie({movie}) {
                   <h3>{movie.vote_average.toFixed(1)}</h3>
                 </div>
               </div>
-            
           }
+          
           <img id='image' onClick={(e)=>addToFirestore(e)} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="poster" />
           <p>{allGenre?.map(item => item.name).join(", ")}</p>
           <h2 onClick={(e)=>addToFirestore(e)} id='title'>{movie.original_title}</h2>
