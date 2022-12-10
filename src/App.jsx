@@ -7,9 +7,7 @@ import MovieDetail from '../pages/MovieDetail'
 import Footer from '../components/Footer'
 import { useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
-// import { useAuthState } from "react-firebase-hooks/auth"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-// import {auth} from "../src/firebase"
 import { Navigate } from "react-router-dom"
 import { useLocation } from "react-router-dom";
 import Nav from '../components/Nav'

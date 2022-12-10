@@ -26,12 +26,12 @@ export default function Movie({movie}) {
 
 
   const addToFirestore = (e) => {
-    if(user){
-
-      if(e.target.id === "add" || e.target.id === "movieAddToWatchlist") {
-
+    
+    if(e.target.id === "add" || e.target.id === "movieAddToWatchlist") {
+      
+      if (user) {
         const find = fireStoreData.find(each => each.id === movie.id)
-
+        
         if(find === undefined){
           const data = [...fireStoreData, {
             id: movie.id,
@@ -40,14 +40,17 @@ export default function Movie({movie}) {
           }]
           fireStorePost(data)
         } 
-
-      } else if(e.target.id === "overlay") {
-        navigate(`/movie/${movie.id}`)
-        }
-
-    } else {
-      navigate(`/login`)
+      } else {
+        navigate(`/login`)
+        sessionStorage.setItem("scrollPosition", window.pageYOffset);
+      }
+      
+    } else if (e.target.id === "overlay" || e.target.id === "title" || e.target.id === "image") {
+      console.log(e.target.id)
+      navigate(`/movie/${movie.id}`)
+      sessionStorage.setItem("scrollPosition", window.pageYOffset);
     }
+
   }
 
   //remove from firestore
@@ -60,10 +63,10 @@ export default function Movie({movie}) {
     }
   }
   
-  //see movie details
-  const seeMovie = () => {
-    navigate(`/movie/${movie.id}`)
-  }
+  // //see movie details
+  // const seeMovie = () => {
+  //   navigate(`/movie/${movie.id}`)
+  // }
   
   const watchlisted = fireStoreData.some(each => each.id === movie.id)
 
@@ -93,9 +96,9 @@ export default function Movie({movie}) {
               </div>
             
           }
-          <img onClick={seeMovie} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="poster" />
+          <img id='image' onClick={(e)=>addToFirestore(e)} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="poster" />
           <p>{allGenre?.map(item => item.name).join(", ")}</p>
-          <Link to={`/movie/${movie.id}`}><h2>{movie.original_title}</h2></Link>
+          <h2 onClick={(e)=>addToFirestore(e)} id='title'>{movie.original_title}</h2>
           {
             watchlisted && user ?
             <button onClick={(e)=>removeFromFirestore(e)} id='movieWatchlisted' className="both">

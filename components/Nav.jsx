@@ -54,7 +54,9 @@ export default function Nav() {
     <div className='navbox'>
         <div className="navcontainer">
             <div className="left">
+
                 <p className="logo"><Link to="/">NMDb</Link></p>
+                <div className="search" style={{position: isMobile && mobileSearch && "absolute", width: isMobile && mobileSearch && "87%"}}>
                 {
                     !isMobile &&
                     <input onChange={(e)=>setSearchQuery(e.target.value)} id="mainInput" type="text" placeholder="Search movies"/>
@@ -63,14 +65,14 @@ export default function Nav() {
                     isMobile && mobileSearch && 
                     <input onChange={(e)=>setSearchQuery(e.target.value)} id="mobileInput" type="text" placeholder="Search movies"/>
                 }
+                {searchResultModal && <SearchResult data={data} isLoading={isLoading} isError={isError} setSearchResultModal={setSearchResultModal}/>}
+                </div>
                 <nav>
                     <ul>
                         <li><NavLink className={({isActive})=>(isActive ? "active" : '')} to="/">Home</NavLink></li>
                         <li><NavLink className={({isActive})=>(isActive ? "active" : '')} to="/discover">Discover</NavLink></li>
                     </ul> 
                 </nav>
-
-                {searchResultModal && <SearchResult data={data} isLoading={isLoading} isError={isError} setSearchResultModal={setSearchResultModal}/>}
 
             </div>
 
@@ -100,7 +102,7 @@ export default function Nav() {
 
             <div className="hamburger">
                 {
-                    mobileSearch ?
+                    isMobile && mobileSearch ?
                         <svg onClick={()=>setMobileSearch(false)} width="24" height="24" viewBox="0 0 54 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 50.3132L27.1566 27.1566M50.3132 4L27.1522 27.1566M27.1522 27.1566L4 4M27.1566 27.1566L50.3132 50.3132" stroke="white" strokeWidth="6.625" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>

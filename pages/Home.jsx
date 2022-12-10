@@ -14,13 +14,23 @@ export default function Home() {
     const [selectedOption, setSelectedOption] = useState("Upcoming")
     const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption.replace(' ', '_').toLowerCase())
     const [expand, setExpand] = useState(false)
-    console.log(selectedOption)
+    
     const selectOption = (e) => {
         setSelectedOption(e.currentTarget.textContent)
         setExpand(false)
         refetch()
     }
-    
+
+    useEffect(()=>{
+        const scrollPosition = sessionStorage.getItem("scrollPosition")
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition))
+            setTimeout(()=>{
+                sessionStorage.removeItem("scrollPosition")
+            },200)
+        }
+    },[trending])
+
     return (
         <>
             <Hero/>
