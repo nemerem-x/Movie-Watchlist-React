@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import Hero from "../components/Hero"
 import Trending from "../components/Trending"
 import Watchlist from "../components/Watchlist"
 import Category from "../components/Category"
 import NowPlaying from "../components/NowPlaying"
-import { moviesSelected } from "../src/reactQueries"
 
 export default function Home() {
     
