@@ -7,17 +7,7 @@ import NowPlaying from "../components/NowPlaying"
 import { moviesSelected } from "../src/reactQueries"
 
 export default function Home() {
-
-    const [selectedOption, setSelectedOption] = useState("Upcoming")
-    const {data: selected, isLoading: load, isError: error, refetch} = moviesSelected(selectedOption.replace(' ', '_').toLowerCase())
-    const [expand, setExpand] = useState(false)
     
-    const selectOption = (e) => {
-        setSelectedOption(e.currentTarget.textContent)
-        setExpand(false)
-        refetch()
-    }
-
     useEffect(()=>{
         const scrollPosition = sessionStorage.getItem("scrollPosition")
         if (scrollPosition) {
@@ -33,16 +23,7 @@ export default function Home() {
             <Hero/>
             <Trending/>
             <Watchlist/>
-            <Category>
-                {selected}
-                {load}
-                {error}
-                {selectedOption}
-                {selectOption}
-                {refetch}
-                {expand}
-                {setExpand}
-            </Category>
+            <Category/>
             <NowPlaying/>
         </>
     )

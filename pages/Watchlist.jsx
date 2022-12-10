@@ -26,11 +26,11 @@ export default function Watchlist() {
         <>
             <div className="watchlistbox">
                 <h1>My Watchlist</h1>
-                <div className="watchlistcontainer">
-
-                    {watchlists}
-
-                </div>
+                {
+                    watchlistsArray.length ?
+                    <div className="watchlistcontainer">{watchlists}</div>
+                    : <h4>No movies in your watchlist.</h4>
+                }
             </div>
             <Trending/>
         </>

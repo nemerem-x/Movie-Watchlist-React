@@ -17,7 +17,7 @@ export default function Watchlist() {
     const watchlists = watchlistsArray?.map(watchlist => {
 
         if (watchlist.status === "loading"){
-            return <p>loading...</p>
+            return <p key={watchlist?.data?.id}>loading...</p>
         }
         return (
             <div key={watchlist?.data?.id} className="listedmovie">
