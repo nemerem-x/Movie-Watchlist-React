@@ -4,7 +4,7 @@ import { movieFullData } from '../src/reactQueries'
 import { videoData } from '../src/reactQueries'
 import { reviewsData } from '../src/reactQueries'
 import Watchlist from '../components/Watchlist'
-import NowPlaying from '../components/Nowplaying'
+import NowPlaying from '../components/NowPlaying'
 import Loader from '/loading.svg'
 import {auth} from "../src/firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
