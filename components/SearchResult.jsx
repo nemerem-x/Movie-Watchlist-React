@@ -27,7 +27,6 @@ export default function SearchResult({data, isLoading, isError, setSearchResultM
     })
 
   return (
-    <div className="searchmodal">
 
         <div className="searchresults">
             
@@ -37,6 +36,5 @@ export default function SearchResult({data, isLoading, isError, setSearchResultM
 
         </div>
 
-    </div>
   )
 }

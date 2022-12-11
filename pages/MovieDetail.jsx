@@ -1,6 +1,5 @@
 import '../style/MovieDetail.css'
-import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { movieFullData } from '../src/reactQueries'
 import { videoData } from '../src/reactQueries'
 import { reviewsData } from '../src/reactQueries'
@@ -14,6 +13,7 @@ import {fireState, fireStatePost} from "../src/recoil"
 
 export default function MovieDetail() {
     
+    const navigate = useNavigate()
     const params = useParams()
     const [user, loading] = useAuthState(auth)
 

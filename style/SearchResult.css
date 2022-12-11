@@ -1,54 +1,54 @@
-.searchmodal {
+.searchresults {
     position: absolute;
     width: 100%;
-    margin: auto;
-    height: auto;
+    /* margin: auto;
+    height: auto; */
     z-index: 3;
     background-color: var(--grey);
     border-radius: 10px;
     top: 4em;
 }
 
-.searchmodal h1 {
+.searchresults h1 {
     color: var(--fontColorFaded);
     display: flex;
     align-items: center;
 }
 
-.searchmodal p, h2 {
+.searchresults p, h2 {
     margin: 0;
 }
 
-.searchmodal p {
+.searchresults p {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--fontColorFaded);
 }
 
-.searchmodal p span {
+.searchresults p span {
     color: var(--secondaryColor);
 }
 
-.searchmodal h2 {
+.searchresults h2 {
     color: var(--fontColor);
     font-size: 1rem;
 }
 
-.searchmodal h3 {
+.searchresults h3 {
     font-size: 1rem;
     margin: 0;
 }
 
-.searchmodal a {
+.searchresults a {
     color: var(--fontColor);
     margin-right: .5em;
     font-size: 1.2rem;
 }
 
-.searchresults {
+/* .searchresults {
     width: 100%;
     position: relative;
-}
+} */
 
 .result {
     cursor: pointer;
