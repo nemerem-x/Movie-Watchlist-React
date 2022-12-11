@@ -55,6 +55,14 @@
     cursor: pointer;
 }
 
+.next svg {
+    transform: rotate(-90deg);
+}
+
+.prev svg {
+    transform: rotate(90deg);
+}
+
 @media screen and (max-width: 768px) {
     .discover {
         width: 95%;

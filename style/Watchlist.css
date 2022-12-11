@@ -45,6 +45,10 @@
     color: var(--secondaryColor);
 }
 
+.watchlistcontainer h1 svg {
+    transform: rotate(-90deg)
+}
+
 .watchlistcontainer .listedinfo h2 {
     font-size: 1rem;
 }
@@ -97,6 +101,11 @@
     border-bottom: 1px solid var(--fontColorFaded);
 }
 
+.listedmovie svg {
+    min-height: 35px;
+    min-width: 35px;
+}
+
 .listedmovie:hover {
     background-color: var(--grey);
 }
@@ -104,8 +113,8 @@
 @media screen and (max-width: 768px) {
     
     .watchlistsection {
-        flex-direction: column;
         gap: 0;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
     .listedmovie:last-child {

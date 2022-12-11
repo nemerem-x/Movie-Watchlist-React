@@ -115,7 +115,7 @@ nav li {
 }
 
 .search {
-  width: 100%;
+  width: 65%;
   position: relative;
   height: 100%;
   display: flex;
@@ -534,6 +534,10 @@ button:disabled {
     left: 7em;
     width: 77%;
     bottom: 0;
+  }
+
+  .search {
+    width: 100%;
   }
 
   #mobileInput {

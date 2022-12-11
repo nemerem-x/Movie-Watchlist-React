@@ -38,7 +38,8 @@
 }
 
 .nowplayingmovie h2 {
-    font-size: 1rem;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
     padding: .3em 0;
     height: 3em;
 }

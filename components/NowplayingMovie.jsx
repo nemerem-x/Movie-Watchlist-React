@@ -9,10 +9,12 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import { useRecoilState } from 'recoil'
 import { useRecoilValue } from 'recoil'
 import {fireState, fireStatePost} from "../src/recoil"
+import { useMediaQuery } from 'react-responsive'
 
 export default function NowplayingMovie({item}) {
 
   const [user, loading] = useAuthState(auth)
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   //React query
   const {data, isLoading, isError} = genreData()
@@ -59,7 +61,7 @@ export default function NowplayingMovie({item}) {
             {
               playVideo ?
               <>
-              <div onClick={()=>setPlayVideo(false)} className="closeVideo"></div>
+              {!isMobile && <div onClick={()=>setPlayVideo(false)} className="closeVideo"></div>}
               <iframe
                   width="1920" height="1080" 
                   src={`https://www.youtube.com/embed/${videodata?.results[0].key}?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1`} title="YouTube video player" frameBorder="0" allowFullScreen>

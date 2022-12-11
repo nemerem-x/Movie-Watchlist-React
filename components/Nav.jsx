@@ -59,7 +59,7 @@ export default function Nav() {
             <div className="left">
 
                 <p className="logo"><Link to="/">NMDb</Link></p>
-                <div className="search" style={{position: isMobile && mobileSearch && "absolute", width: isMobile && mobileSearch && "87%"}}>
+                <div className="search" style={{position: isMobile && mobileSearch && "absolute", width: isMobile && mobileSearch && "82%"}}>
                 {
                     !isMobile &&
                     <input onChange={(e)=>setSearchQuery(e.target.value)} id="mainInput" type="text" placeholder="Search movies"/>
