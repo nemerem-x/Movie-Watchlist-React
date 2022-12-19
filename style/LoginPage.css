@@ -18,9 +18,9 @@
     border-radius: 10px;
 }
 
-/* .loginpagecontainer input {
+.loginpagecontainer input {
     margin: .5em 0;
-} */
+}
 
 .loginpagecontainer span {
     color: var(--fontColor);
