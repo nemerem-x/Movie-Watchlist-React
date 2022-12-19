@@ -11,8 +11,11 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 90%;
     height: auto;
+    background-color: #2b2b2b;
+    padding: 1em;
+    border-radius: 10px;
 }
 
 /* .loginpagecontainer input {

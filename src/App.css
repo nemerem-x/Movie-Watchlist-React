@@ -20,7 +20,7 @@ body {
 
 input {
   padding: 1em;
-  /* margin: .5em 0; */
+  margin: .5em 0;
   font-size: 0.9rem;
   border: none;
   border-radius: 10px;
@@ -32,9 +32,9 @@ input {
 }
 
 button {
-  padding: .5em 1em;
+  padding: .7em 1em;
   margin: 1em 0;
-  font-size: 1rem;
+  font-size: .9rem;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -212,7 +212,8 @@ nav li {
 
 .loginBox {
   position: absolute;
-  background-color: var(--primaryColor);
+  /* background-color: var(--primaryColor); */
+  background-color: #2b2b2b;
   width: 300px;
   padding: 2em;
   height: auto;
@@ -336,6 +337,17 @@ button:disabled {
   text-decoration: none;
 }
 
+#googleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  font-size: .8rem;
+  margin-top: 0;
+  width: 100%;
+  font-weight: 600;
+  background-color: #fff;
+}
 
 .pageContainer {
   position: relative;
