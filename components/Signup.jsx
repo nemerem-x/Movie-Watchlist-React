@@ -6,7 +6,7 @@ import { doc, setDoc } from "firebase/firestore"
 import { Link } from "react-router-dom"
 import { Navigate } from "react-router-dom"
 import Loader from '/loading.svg'
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 
 function Signup() {
   const [error, setError] = useState(false)
@@ -44,7 +44,8 @@ function Signup() {
   const provider = new GoogleAuthProvider(); 
 
   const googleSignUp = () => {
-    signInWithPopup(auth, provider)
+    signInWithRedirect(auth, provider)
+    // signInWithPopup(auth, provider)
     .then((result) => {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;

@@ -3,7 +3,7 @@ import '../src/App.css'
 import { signInWithEmailAndPassword } from "firebase/auth"
 import {auth} from '../src/firebase'
 import Loader from '/loading.svg'
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 
 function Login() {
   const [error, setError] = useState(false)
@@ -35,9 +35,10 @@ function Login() {
   }
 
   const provider = new GoogleAuthProvider(); 
-
+  
   const googleSignIn = () => {
-    signInWithPopup(auth, provider)
+    signInWithRedirect(auth, provider)
+    // signInWithPopup(auth, provider)
     .then((result) => {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
