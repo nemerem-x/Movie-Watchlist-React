@@ -526,6 +526,10 @@ button:disabled {
     padding-bottom: 3em;
   }
 
+  .mobilecontainer button {
+    width: 100%;
+  }
+
   .mobileMenuLogin {
     height: auto;
     width: 72%;
